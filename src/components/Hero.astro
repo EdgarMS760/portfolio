@@ -1,0 +1,12 @@
+---
+// src/components/Hero.astro
+import perfil from '../assets/avatar/avatar.webp';
+const { t } = Astro.props;
+---
+
+<section class="flex flex-col items-center text-center py-16 px-4">
+  <img src={perfil.src} alt="Foto de perfil" class="w-32 h-32 rounded-full shadow-md mb-4" />
+  <h1 class="text-3xl font-bold">{t.hero.title}</h1>
+  <p class="text-lg mt-2 max-w-md text-gray-600 dark:text-gray-300">{t.hero.description}</p>
+  <p class="mt-4 text-blue-600 dark:text-blue-400">{t.hero.contact}</p>
+</section>

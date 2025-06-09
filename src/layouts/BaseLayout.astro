@@ -1,0 +1,18 @@
+---
+// src/layouts/BaseLayout.astro
+const { lang = 'es', isDark = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class={isDark ? 'dark' : ''}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Portafolio</title>
+  </head>
+  <body class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+    <main class="min-h-screen">
+      <slot />
+    </main>
+  </body>
+</html>
