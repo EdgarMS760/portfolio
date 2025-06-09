@@ -1,0 +1,43 @@
+---
+const { currentLang = 'es' } = Astro.props;
+---
+
+<div class="fixed top-4 right-4 z-50 flex items-center gap-4">
+  <!-- Switch Dark Mode -->
+  <button
+    id="theme-toggle"
+    class="cursor-pointer w-10 h-10 rounded-full border border-gray-400 dark:border-white flex items-center justify-center transition-colors"
+    aria-label="Toggle dark mode"
+  >
+    <span id="theme-icon" class="text-xl">🌞</span>
+  </button>
+
+  <!-- Language Switch -->
+<form method="get" class="text-sm">
+  <select
+    name="lang"
+    class="cursor-pointer bg-white dark:bg-gray-800 dark:text-white border border-gray-400 rounded px-2 py-1 appearance-none"
+  >
+    <option class="bg-white dark:bg-gray-800 text-black dark:text-white" value="es" selected={currentLang === 'es'}>ES</option>
+    <option class="bg-white dark:bg-gray-800 text-black dark:text-white" value="en" selected={currentLang === 'en'}>EN</option>
+  </select>
+</form>
+
+</div>
+
+<script is:inline>
+  const toggleButton = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const icon = document.getElementById('theme-icon');
+
+  if (localStorage.theme === 'dark') {
+    html.classList.add('dark');
+    icon.textContent = '🌙';
+  }
+
+  toggleButton.addEventListener('click', () => {
+    const isDark = html.classList.toggle('dark');
+    localStorage.theme = isDark ? 'dark' : 'light';
+    icon.textContent = isDark ? '🌙' : '🌞';
+  });
+</script>

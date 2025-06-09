@@ -1,8 +1,8 @@
 // src/i18n/es.ts
 export default {
   hero: {
-    title: '¡Hola! Soy Juan Pérez',
-    description: 'Desarrollador frontend enfocado en crear experiencias interactivas y accesibles.',
-    contact: 'Contáctame en juan@example.com',
+    title: '¡Bienvenido! Soy Edgar Martínez',
+    description: 'Desarrollador FullStack, me encanta crear aplicaciones modernas y probar nuevas herramientas.',
+
   },
 };
