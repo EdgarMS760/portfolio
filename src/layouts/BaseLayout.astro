@@ -1,17 +1,23 @@
 ---
 import TopControls from '../components/TopControls.astro';
-const { lang = 'en' } = Astro.props;
+const { lang, t } = Astro.props;
+const languages = [
+  { code: "es", label: t.languageOptions.es },
+  { code: "en", label: t.languageOptions.en }
+];
+
 ---
 
 <!DOCTYPE html>
-<html lang={lang} class="">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi Portafolio</title>
+    <title>Edgar Martinez</title>
+    <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
-    <TopControls currentLang={lang} />
+    <TopControls currentLang={lang} languages={languages} />
 
 
     <main class="min-h-screen">
