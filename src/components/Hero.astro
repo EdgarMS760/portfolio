@@ -8,7 +8,7 @@ import cv from "../assets/iconos/cv.svg";
 
 <section
   id="hero"
-  class="flex flex-col md:flex-row items-center justify-center py-16 px-6 lg:px-20 max-w-screen-xl mx-auto opacity-0 gap-10 lg:gap-20"
+  class="flex flex-col md:flex-row items-center justify-center pt-16 px-6 lg:px-20 max-w-screen-xl mx-auto opacity-0 gap-10 lg:gap-20"
 >
   <div id="hero-image" class="">
     <img
@@ -24,28 +24,41 @@ import cv from "../assets/iconos/cv.svg";
     <p class="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
       {t.home.description}
     </p>
-    <div class="flex filter dark:invert">
-      <img
-        src={GitHub.src}
-        alt="GitHub Icon"
-        class="inline-block w-12 h-12 mr-4 cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
-        onclick="window.open('https://github.com/EdgarMS760', '_blank');"
-      />
-      <img
-        src={Linkedin.src}
-        alt="LinkedIn Icon"
-        class="inline-block w-12 h-12 mr-4 cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
-        onclick="window.open('https://www.linkedin.com/in/edgar-francisco-martinez-sandoval-0a8449207', '_blank');"
-      />
+    <div class="flex filter justify-center dark:invert">
+      <a
+        href="https://github.com/EdgarMS760"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={GitHub.src}
+          alt="GitHub Icon"
+          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+        />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/edgar-francisco-martinez-sandoval-0a8449207"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={Linkedin.src}
+          alt="LinkedIn Icon"
+          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+        />
+      </a>
       <a href={t.cv} target="_blank" rel="noopener noreferrer">
         <img
           src={cv.src}
           alt="CV Icon"
-          class="inline-block w-12 h-12 mr-4 cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
+          class="w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
         />
       </a>
     </div>
   </div>
 </section>
 
+
+
 <script type="module" src="/js/hero-animation.js"></script>
+

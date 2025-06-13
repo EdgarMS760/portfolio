@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import es from '../../../i18n/es';
+import en from '../../../i18n/en';
+import type { Language } from '../../../types/language.type';
+import "../../../styles/global.css";
+// Obtener parámetros
+const lang = Astro.params.lang as Language;
+const slug = Astro.params.slug;
+const translations: Record<Language, typeof es> = { es, en };
+const t = translations[lang];
+
+// Buscar el proyecto por slug
+const project = t.projects.detail.find((p) => p.slug === slug);
+if (!project) throw new Error(`No se encontró el proyecto con slug: ${slug}`);
+const color = project.color || '#1E40AF'; // fallback azul
+
+// Exportar rutas estáticas
+export async function getStaticPaths() {
+  const locales: Language[] = ['es', 'en'];
+  const translations = {
+    es: (await import('../../../i18n/es')).default,
+    en: (await import('../../../i18n/en')).default,
+  };
+
+  const paths = [];
+
+  for (const lang of locales) {
+    const t = translations[lang];
+    for (const project of t.projects.detail) {
+      paths.push({
+        params: { lang, slug: project.slug },
+      });
+    }
+  }
+
+  return paths;
+}
+---
+
+<BaseLayout lang={lang} t={t}>
+  <!-- Loader que parte blanco y transiciona al color del proyecto -->
+  <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-gray-900 transition-colors">
+    <div id="spinner" class="w-16 h-16 rounded-full bg-black scale-0"></div>
+  </div>
+
+  <!-- Contenido del proyecto -->
+  <section class="px-6 py-20 max-w-4xl mx-auto fade-in opacity-0 scale-95 translate-y-10">
+    <h1 class="text-4xl lg:text-5xl font-bold mb-6">{project.title}</h1>
+    <img src={project.image} alt={project.title} class="mb-6 rounded-lg shadow-md" />
+    <p class="text-lg text-gray-700 dark:text-gray-300">{project.description}</p>
+  </section>
+
+  <script type="module">
+    import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
+
+    window.addEventListener('load', () => {
+      // Animar el spinner
+      anime({
+        targets: '#spinner',
+        scale: [0, 1.2, 1],
+        easing: 'easeOutElastic(1, .6)',
+        duration: 100
+      });
+
+      // Cambiar fondo blanco -> color del proyecto
+      anime({
+        targets: '#loader',
+        backgroundColor: ['#ffffff', '{color}'],
+        duration: 1000,
+        easing: 'easeInOutQuad',
+        delay: 600,
+      });
+
+      // Desaparecer loader
+      anime({
+        targets: '#loader',
+        opacity: [1, 0],
+        duration: 700,
+        easing: 'easeInOutQuad',
+        delay: 1600,
+        complete: () => {
+          document.getElementById('loader')?.remove();
+        }
+      });
+
+      // Mostrar contenido
+      anime({
+        targets: '.fade-in',
+        opacity: [0, 1],
+        translateY: [40, 0],
+        scale: [0.95, 1],
+        duration: 800,
+        easing: 'easeOutCubic',
+        delay: 1300
+      });
+    });
+  </script>
+</BaseLayout>
