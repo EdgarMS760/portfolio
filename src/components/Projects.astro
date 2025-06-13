@@ -1,5 +1,19 @@
 ---
-const { t,lang } = Astro.props;
+import { Image } from "astro:assets";
+
+const { t, lang } = Astro.props;
+
+import instacatMain from "../assets/instacat/login.webp";
+import timHortonsMain from "../assets/interfaces/dash2.webp";
+import faithFinderMain from "../assets/faithFinder/busqueda.webp";
+const imageMap = {
+    project1: "https://via.placeholder.co/600x400",
+    project2: instacatMain,
+    project3: timHortonsMain,
+    project4: faithFinderMain,
+    project5: "https://via.placeholder.co/600x400",
+    project6: "https://via.placeholder.co/600x400",
+};
 ---
 
 <section
@@ -11,36 +25,46 @@ const { t,lang } = Astro.props;
             {t.projects.title}
         </h1>
     </div>
+
     {
         t.projects.detail.map((project, index) => (
-            <div class="opacity-0" data-project>
+            <div
+                data-project
+                data-color={project.color}
+                style={`background: linear-gradient(to ${index % 2 !== 0 ? "left" : "right"}, ${project.color} 0%, ${project.color}33 40%, transparent 70%)`}
+            >
                 <div
-                    class={`flex flex-col md:flex-row items-center gap-10 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+                    class={`flex flex-col md:flex-row items-center gap-10 ${
+                        index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                    }`}
                 >
-                    <img
-                        src={project.image}
+                    <Image
+                        src={imageMap[project.slug]}
                         alt={project.title}
                         class="w-full md:w-1/2 rounded-lg shadow-xl"
                         data-project-image
+                        width="1000"
+                        height="1000"
                     />
                     <div
                         class="md:w-1/2 text-center md:text-left"
                         data-project-text
                     >
-                        <h2 class="text-2xl lg:text-4xl font-bold mb-4">
+                        <h2 class="text-black dark:text-white text-2xl lg:text-4xl font-bold mb-4">
                             {project.title}
                         </h2>
                         <p class="text-gray-700 dark:text-gray-300 text-base lg:text-lg">
                             {project.shortDescription}
                         </p>
 
-                        <a
-                            href={`/${lang}/project/${project.slug}`}
-                            class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                            onclick={`event.preventDefault(); navigateWithTransition('/${lang}/projects/${project.slug}')`}
+                        <button
+                            type="button"
+                            class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
+                            data-project-btn
+                            data-url={`/${lang}/projects/${project.slug}`}
                         >
                             Ver más
-                        </a>
+                        </button>
 
                         <div
                             class="mt-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
@@ -58,5 +82,192 @@ const { t,lang } = Astro.props;
         ))
     }
 </section>
-<script type="module" src="/js/scroll-animation.js"></script>
-<script type="module" src="/js/showDetailProj-animation.js"></script>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const projects = document.querySelectorAll("[data-project]");
+
+        // Aseguramos visibilidad inicial para animar internamente
+        gsap.set(projects, { opacity: 1 });
+
+        projects.forEach((project, index) => {
+            const image = project.querySelector("[data-project-image]");
+            const text = project.querySelector("[data-project-text]");
+            const btn = project.querySelector("[data-project-btn]");
+            const color = project.dataset.color || "#000000";
+            console.log(`Color for project ${index + 1}:`, color);
+            // HEX a RGBA
+            const hexToRGBA = (hex, alpha = 0.4) => {
+                const bigint = parseInt(hex.replace("#", ""), 16);
+                const r = (bigint >> 16) & 255;
+                const g = (bigint >> 8) & 255;
+                const b = bigint & 255;
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            };
+
+            const shadowColor = hexToRGBA(color, 0.5);
+            // Listener de click para redirigir
+            console.log("shadowColor:", shadowColor);
+            // Listener de click para redirigir
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    const url = btn.dataset.url;
+                    // Aquí podrías lanzar una animación de salida antes de cambiar de página
+                    window.location.href = url;
+                });
+            }
+
+            // Timeline de entrada y salida con ScrollTrigger
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: project,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play reverse play reverse",
+                    // markers: true, // descomenta para debug
+                },
+                defaults: { duration: 0.8, ease: "power4.out" },
+            });
+
+            // Animación de entrada de la imagen (manteniendo la rotación de proyecto si quieres)
+            tl.from(image, {
+                opacity: 0,
+                rotateY: index % 2 === 0 ? 90 : -90,
+                transformOrigin: "center center",
+                scale: 0.8,
+            });
+
+            // Animación de entrada del texto (hijos como h2, p, etc.)
+            tl.from(
+                text.children,
+                {
+                    opacity: 0,
+                    y: 50,
+                    skewY: 10,
+                    stagger: 0.15,
+                    duration: 0.8,
+                },
+                "-=1.2",
+            );
+
+            // Animación de salida al salirse del viewport
+            tl.to(project, {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power1.in",
+                scrollTrigger: {
+                    trigger: project,
+                    start: "bottom 20%",
+                    end: "bottom 0%",
+                    scrub: true,
+                },
+            });
+
+            // Hover en tarjeta de proyecto
+            project.addEventListener("mouseenter", () => {
+                gsap.to(image, {
+                    scale: 1.03,
+                    boxShadow: `0 20px 40px ${shadowColor}`,
+                    duration: 0.4,
+                    ease: "power2.out",
+                });
+                gsap.to(project, {
+                    boxShadow: "0 20px 30px rgba(0,0,0,0.3)",
+                    rotateY: index % 2 === 0 ? 5 : -5,
+                    duration: 0.1,
+                    transformOrigin: "center center",
+                });
+            });
+            project.addEventListener("mouseleave", () => {
+                gsap.to(image, {
+                    scale: 1,
+                    boxShadow: "0 12px 30px rgba(0,0,0,0.1)",
+                    duration: 0.4,
+                    ease: "power2.out",
+                });
+                gsap.to(project, {
+                    boxShadow: "0 0 0 rgba(0,0,0,0)",
+                    rotateY: 0,
+                    duration: 0.1,
+                    ease: "power2.out",
+                });
+            });
+
+            // Hover en botón "Ver más" (solo escala y sombra, sin rotación)
+            if (btn) {
+                btn.addEventListener("mouseenter", () => {
+                    gsap.to(btn, {
+                        scale: 1.1,
+                        boxShadow: "0 0 20px #2563eb",
+                        duration: 0.3,
+                        ease: "power2.out",
+                    });
+                });
+                btn.addEventListener("mouseleave", () => {
+                    gsap.to(btn, {
+                        scale: 1,
+                        boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
+                        duration: 0.3,
+                        ease: "power2.out",
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Fondo sutil para cada proyecto con colores alternados */
+
+    [data-project] {
+        border-radius: 1rem;
+        padding: 2rem;
+        transition:
+            box-shadow 0.4s ease,
+            transform 0.4s ease;
+        cursor: pointer;
+        will-change: transform, box-shadow;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Texto del proyecto */
+
+    /* Botón "Ver más": ahora estilos aplicados a <button> */
+    [data-project-text] button[data-project-btn] {
+        display: inline-block;
+        background-color: #2563eb;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        transition:
+            background-color 0.3s ease,
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+        user-select: none;
+        border: none;
+    }
+    [data-project-text] button[data-project-btn]:hover {
+        background-color: #1e40af;
+        box-shadow: 0 6px 16px rgba(30, 64, 175, 0.6);
+        animation: pulse 1.5s infinite alternate ease-in-out;
+        transform: scale(1.05);
+    }
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 6px 16px rgba(30, 64, 175, 0.6);
+        }
+        100% {
+            box-shadow: 0 0 24px rgba(37, 99, 235, 0.9);
+        }
+    }
+
+    /* Imagen proyecto: sombra, borde redondeado */
+</style>
