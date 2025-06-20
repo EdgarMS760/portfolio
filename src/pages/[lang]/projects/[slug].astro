@@ -1,9 +1,10 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import es from '../../../i18n/es';
-import en from '../../../i18n/en';
-import type { Language } from '../../../types/language.type';
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import es from "../../../i18n/es";
+import en from "../../../i18n/en";
+import type { Language } from "../../../types/language.type";
 import "../../../styles/global.css";
+
 // Obtener parámetros
 const lang = Astro.params.lang as Language;
 const slug = Astro.params.slug;
@@ -13,14 +14,14 @@ const t = translations[lang];
 // Buscar el proyecto por slug
 const project = t.projects.detail.find((p) => p.slug === slug);
 if (!project) throw new Error(`No se encontró el proyecto con slug: ${slug}`);
-const color = project.color || '#1E40AF'; // fallback azul
+const color = project.color || "#1E40AF"; // fallback azul
 
 // Exportar rutas estáticas
 export async function getStaticPaths() {
-  const locales: Language[] = ['es', 'en'];
+  const locales: Language[] = ["es", "en"];
   const translations = {
-    es: (await import('../../../i18n/es')).default,
-    en: (await import('../../../i18n/en')).default,
+    es: (await import("../../../i18n/es")).default,
+    en: (await import("../../../i18n/en")).default,
   };
 
   const paths = [];
@@ -38,14 +39,27 @@ export async function getStaticPaths() {
 }
 ---
 
-<BaseLayout lang={lang} t={t}>
+  <!-- Loader -->
+  <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+    <div class="loader-circle w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
 
   <!-- Contenido del proyecto -->
-  <section id="project-content" class="px-6 py-20 max-w-4xl mx-auto">
-    <h1 class="text-4xl lg:text-5xl font-bold mb-6">{project.title}</h1>
-    <img src={project.image} alt={project.title} class="mb-6 rounded-lg shadow-md" />
-    <p class="text-lg text-gray-700 dark:text-gray-300">{project.description}</p>
+  <section id="project-content" class="opacity-0 px-6 py-20 max-w-4xl mx-auto space-y-6">
+    <h1 class="project-title text-4xl lg:text-5xl font-bold mb-6">{project.title}</h1>
+    <div class="relative overflow-hidden w-full max-w-xl mx-auto rounded-full mask-container">
+      <img src={project.image} alt={project.title} class="project-image w-full rounded-lg shadow-md" />
+    </div>
+    <p class="project-description text-lg text-gray-700 dark:text-gray-300">{project.description}</p>
   </section>
 
-</BaseLayout>
-
+  <style>
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>

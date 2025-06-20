@@ -16,32 +16,108 @@ export default {
         title: 'Studify',
         slug: 'project1',
         description: 'Descripción breve del proyecto 1.',
-        image: 'https://placehold.co/600x400',
         color: '#1E40AF'
       },
       {
         title: 'instacat',
-        slug: 'project2',
+        slug: 'Instacat',
         shortDescription: ' blog-like web platform ',
-        description: 'InstaCat is a blog-like web platform that allows you to make posts, edit them and follow other users to see their profiles. To build the site, we use Tailwind CSS for the frontend design, Java for the programming logic and MySQL for the database. With InstaCat, you can enjoy a smooth and engaging experience while sharing your posts and connecting with other users.',
-        image: 'https://placehold.co/600x400',
-        color: '#ff5733'
+        description: 'InstaCat is a blog-like web platform that allows you to make posts, edit them and follow other users to view their profiles. To build the site, Tailwind CSS was used for the frontend, Java for the programming logic and MySQL for the database. With InstaCat, you can enjoy an engaging experience while sharing your posts and connecting with other users.',
+        features: [{
+          title: `Main Feed`,
+          description: `The main feed of InstaCat is the heart of the platform, designed to offer an interactive experience for users. Here you can:
+            <ul class="text-gray-600 dark:text-gray-300">
+                <li><strong>Explore posts:</strong> View content shared by other users in a dynamic and visually appealing format.</li>
+                <li><strong>Filter by category:</strong> Find posts that interest you by applying filters based on topics such as cats, technology, food, sports, among others.</li>
+                <li><strong>Create and edit posts:</strong> Share your own experiences, images, and thoughts, with the option to modify your posts at any time.</li>
+                <li><strong>Social interaction:</strong> You can "like" and comment on posts to spark conversations and strengthen the community.</li>
+            </ul>
+            `,
+        },
+        {
+          title: `User Profile`,
+          description: `The user profile on InstaCat is the space where each user can manage their personal information, connect with others, and view their activity within the platform. Here you can:
+            <ul class="text-gray-600 dark:text-gray-300">
+                <li><strong>Personal information:</strong> Your profile picture, username, full name, email, and age are displayed, allowing other users to get to know you better.</li>
+                <li><strong>Profile editing:</strong> You can update your personal data at any time, changing your photo, username, or email as needed.</li>
+                <li><strong>Followers list:</strong> See who you follow and explore their profiles and posts.</li>
+                <li><strong>Your posts:</strong> Access all the content you’ve shared on the platform, with the option to edit or delete any post.</li>
+            </ul>`,
+        },
+        {
+          title: 'Friend Profile',
+          description: `
+            The friend profile on InstaCat allows you to learn more about other users, interact with their content, and manage your connection with them. Here you can:
+            <ul class="text-gray-600 dark:text-gray-300">
+                <li><strong>User information:</strong> View the profile picture, username, full name, and other public data shared by the user.</li>
+                <li><strong>Follow or unfollow:</strong> Decide whether to follow this user to see their posts in your feed or unfollow them if you prefer.</li>
+                <li><strong>View posts:</strong> Browse all the content shared by the user, including images, texts, and cat-related experiences.</li>
+                <li><strong>Interaction:</strong> Comment and "like" their posts, helping to build community and encourage conversations.</li>
+            </ul>`
+        },
+        {
+          title: 'Advanced Search',
+          description: `
+          Advanced search on InstaCat allows users to find posts more precisely by using different filtering criteria to obtain the most relevant results. Here you can:
+          <ul class="text-gray-600 dark:text-gray-300">
+              <li><strong>Search by content:</strong> Find posts that contain specific keywords in the title or body of the message.</li>
+              <li><strong>Search by category:</strong> Filter posts according to specific topics, such as technology, fashion, sports, among others.</li>
+              <li><strong>Search by date range:</strong> Locate posts made within a specific period, from a chosen date to the present.</li>
+              <li><strong>Combined filters:</strong> Use all the criteria together to perform a more detailed search and get accurate results.</li>
+          </ul>
+          `
+        }
+        ],
+
+        color: '#A1C5E4'
       },
       {
         title: 'Tim Hortons',
-        slug: 'project3',
-        shortDescription: 'Tim Hortons Mexico website redesign',
-        description: 'Following UX/UI principles and patterns, a comprehensive redesign of the Tim Hortons Mexico website was carried out to improve the user experience and visual interface. This redesign was done using React for the frontend, ensuring a dynamic and responsive interface, and Python with the Flask framework for the backend for simple operations such as authentication and sending emails. The result is a more intuitive and attractive platform that facilitates navigation and improves user interaction with Tim Hortons Mexico\'s services and products.',
-        image: 'https://placehold.co/600x400',
-        color: '#b2ff33'
+        slug: 'TimHortons',
+        shortDescription: 'Redesign of the Tim Hortons Mexico website',
+        description:
+          'Following UX/UI principles and patterns, a redesign of the Tim Hortons Mexico website was carried out to improve the user experience. The redesign was implemented using React for the frontend, ensuring a dynamic and responsive interface, and Python with the Flask framework for the backend, handling basic operations such as authentication and email services. The result is a more intuitive and visually appealing platform that enhances navigation and user interaction with Tim Hortons Mexico’s products and services.',
+        features: [
+          {
+            title: 'Login & Register',
+            description: 'A simple, visually appealing, and user-centric login experience.',
+          },
+          {
+            title: 'Revamped homepage',
+            description: 'Improved visual layout, typographic hierarchy, and clear calls-to-action for better navigation.',
+          },
+          {
+            title: 'Checkout process',
+            description: 'Fast, accessible, and straightforward.',
+          },
+        ],
+        color: '#C8272D'
       },
       {
         title: 'Faith Finder',
-        slug: 'project4',
+        slug: 'FaithFinder',
         shortDescription: 'Bible verse search platform',
-        description: 'Faith Finder is a platform that allows you to search for any Bible verse by simply typing a word. It has advanced filters and options for users to add verses to their favorites. It also offers an administration panel to unlock users and the option to download your favorite chapter in PDF format. Faith Finder is a desktop application developed with .NET and SQL Server.',
-        image: 'https://placehold.co/600x400',
-        color: '#1E40AF'
+        description:
+          'Faith Finder is a desktop application that lets users search Bible verses by typing keywords. It features login and registration, advanced filters (language, version, testament, book), search history, favorites, and PDF chapter download. It also includes an admin panel to unlock blocked accounts. Built with .NET and SQL Server using stored procedures, triggers, and views.',
+        features: [
+          {
+            title: 'Smart search',
+            description: 'Quickly find Bible verses just by typing a keyword.',
+          },
+          {
+            title: 'Advanced filters',
+            description: 'Filter results by language, version, testament, book, chapter, or verse for precise queries.',
+          },
+          {
+            title: 'Favorites & PDF export',
+            description: 'Save key verses and download full chapters as PDF.',
+          },
+          {
+            title: 'User management',
+            description: 'Admin panel to unlock accounts blocked due to password errors.',
+          }
+        ],
+        color: '#F6DFB4'
       }
     ]
   }

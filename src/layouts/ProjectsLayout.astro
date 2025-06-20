@@ -1,0 +1,28 @@
+---
+import TopControls from '../components/TopControls.astro';
+const { lang, t } = Astro.props;
+const languages = [
+  { code: "es", label: t.languageOptions.es },
+  { code: "en", label: t.languageOptions.en }
+];
+
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>innstacar</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
+  </head>
+  <body class="text-black transition-colors duration-300 font-sans">
+
+
+    <main class="min-h-screen">
+      <slot />
+    </main>
+  </body>
+</html>

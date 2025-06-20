@@ -1,8 +1,8 @@
 export default {
-  cv:"https://drive.google.com/file/d/1EnCr3qrjl04nwSev507XqzFuiXHIzl7c/view?usp=sharing",
+  cv: "https://drive.google.com/file/d/1EnCr3qrjl04nwSev507XqzFuiXHIzl7c/view?usp=sharing",
   languageOptions: {
-      es: "Español",
-      en: "Inglés"
+    es: "Español",
+    en: "Inglés"
   },
   home: {
     title: '¡Bienvenido! Soy Edgar Martínez',
@@ -11,39 +11,113 @@ export default {
   },
   projects: {
     title: 'Proyectos',
-    detail:[
-{
+    detail: [
+      {
         title: 'Studify',
         slug: 'project1',
         shortDescription: 'Aplicación web de gestión de tareas y notas',
         description: 'Descripción breve del proyecto 1.',
-        image: 'https://placehold.co/600x400',
         color: '#1E40AF'
       },
       {
         title: 'instacat',
-        slug: 'project2',
+        slug: 'Instacat',
         shortDescription: 'plataforma web tipo blog',
-        description: 'InstaCat es una plataforma web tipo blog que te permite realizar publicaciones, editarlas y seguir a otros usuarios para ver sus perfiles. Para construir el sitio, utilizamos Tailwind CSS para el diseño frontend, Java para la lógica de programación y MySQL para la base de datos. Con InstaCat, puedes disfrutar de una experiencia fluida y atractiva mientras compartes tus publicaciones y te conectas con otros usuarios.',
-        image: 'https://placehold.co/600x400',
+        description: 'InstaCat es una plataforma web tipo blog que te permite realizar publicaciones, editarlas y seguir a otros usuarios para ver sus perfiles. Para construir el sitio, se utilizó Tailwind CSS para el frontend, Java para la lógica de programación y MySQL para la base de datos.',
+        features: [{
+          title: `Feed principal`,
+          description: `El feed principal de InstaCat es el corazón de la plataforma, diseñado para ofrecer una experiencia interactiva para los usuarios. Aquí puedes:
+        <ul class="text-gray-600 dark:text-gray-300">
+            <li><strong>Explorar publicaciones:</strong> Ver el contenido compartido por otros usuarios en un formato dinámico y visualmente atractivo.</li>
+            <li><strong>Filtrar por categoría:</strong> Encuentra publicaciones que te interesen aplicando filtros basados en temas como gatos, tecnología, comida, deportes, entre otros.</li>
+            <li><strong>Crear y editar publicaciones:</strong> Comparte tus propias experiencias, imágenes y pensamientos, con la posibilidad de modificar tus publicaciones en cualquier momento.</li>
+            <li><strong>Interacción social:</strong> Puedes dar "me gusta" y comentar en las publicaciones para generar conversaciones y fortalecer la comunidad.</li>
+        </ul>
+        `,
+        },
+        {
+          title: `Perfil de usuario`, description: `El perfil de usuario en InstaCat es el espacio donde cada usuario puede gestionar su información personal, conectar con otros y visualizar su actividad dentro de la plataforma. Aquí puedes:
+        <ul class="text-gray-600 dark:text-gray-300">
+            <li><strong>Datos personales:</strong> Se muestra tu foto de perfil, tu nombre de usuario, nombre completo, correo electrónico y edad, permitiendo que otros usuarios te conozcan mejor.</li>
+            <li><strong>Edición de perfil:</strong> Puedes actualizar tus datos personales en cualquier momento, cambiando tu foto, nombre de usuario o correo según lo necesites.</li>
+            <li><strong>Lista de seguidores:</strong> Visualiza a quién sigues y descubre sus perfiles y publicaciones.</li>
+            <li><strong>Tus publicaciones:</strong> Accede a todo el contenido que has compartido en la plataforma, con la opción de editar o eliminar cualquier publicación.</li>
+        </ul> `},
+        {
+          title: 'Perfil de amigos',
+          description: `
+          El perfil de amigos en InstaCat te permite conocer más sobre otros usuarios, interactuar con su contenido y gestionar tu conexión con ellos. Aquí puedes:
+        <ul class="text-gray-600 dark:text-gray-300">
+            <li><strong>Información del usuario:</strong> Visualiza la foto de perfil, nombre de usuario, nombre completo y otros datos públicos que el usuario haya compartido.</li>
+            <li><strong>Seguir o dejar de seguir:</strong> Decide si quieres seguir a este usuario para ver sus publicaciones en tu feed o quitar el seguimiento si lo prefieres.</li>
+            <li><strong>Ver publicaciones:</strong> Explora todo el contenido compartido por el usuario, incluyendo imágenes, textos y experiencias relacionadas con gatos.</li>
+            <li><strong>Interacción:</strong> Comenta y da "me gusta" en sus publicaciones, fortaleciendo la comunidad y fomentando conversaciones.</li>
+        </ul> `
+        },
+        {
+          title: 'Busqueda avanzada',
+          description: `
+        La búsqueda avanzada en InstaCat permite a los usuarios encontrar publicaciones con mayor precisión, utilizando diferentes criterios de filtrado para obtener los resultados más relevantes. Aquí puedes:
+        <ul class="text-gray-600 dark:text-gray-300">
+            <li><strong>Búsqueda por contenido:</strong> Encuentra publicaciones que contengan palabras clave específicas dentro del título o el cuerpo del mensaje.</li>
+            <li><strong>Búsqueda por categoría:</strong> Filtra publicaciones según temas específicos, como tecnología, moda, deportes, entre otros.</li>
+            <li><strong>Búsqueda por rango de fechas:</strong> Localiza publicaciones realizadas dentro de un período determinado, desde una fecha específica hasta la actual.</li>
+            <li><strong>Combinación de filtros:</strong> Usa todos los criterios juntos para realizar una búsqueda más detallada y obtener resultados precisos.</li>
+        </ul>
+
+        `
+        }],
         color: '#A1C5E4'
       },
       {
         title: 'Tim Hortons',
-        slug: 'project3',
+        slug: 'TimHortons',
         shortDescription: 'Rediseño de la página de Tim Hortons México',
-        description: 'Siguiendo los principios y patrones de UX/UI, se llevó a cabo un rediseño integral de la página de Tim Hortons México para mejorar la experiencia del usuario y la interfaz visual. Este rediseño se realizó utilizando React para el frontend, asegurando una interfaz dinámica y receptiva, y Python con el framework Flask para el backend en operaciones sencillas como autenticacion y envio de correos. El resultado es una plataforma más intuitiva y atractiva que facilita la navegación y mejora la interacción del usuario con los servicios y productos de Tim Hortons México.',
-        image: 'https://placehold.co/600x400',
+        description:
+          'Siguiendo principios y patrones UX/UI, se realizó un rediseño del sitio web de Tim Hortons México para mejorar la experiencia de usuario. Este rediseño se realizó utilizando React para el frontend, asegurando una interfaz dinámica y responsiva, y Python con el framework Flask para el backend para operaciones sencillas como autenticación y envío de correos electrónicos. El resultado es una plataforma más intuitiva y atractiva que facilita la navegación y mejora la interacción del usuario con los servicios y productos de Tim Hortons México.',
+        features: [
+          {
+            title: 'Inicio de sesión & Registro',
+            description: 'Una experiencia de inicio de sesión sencilla, visualmente atractiva y centrada en el usuario.',
+          },
+          {
+            title: 'Página de inicio renovada',
+            description: 'Se mejoró la disposición visual, jerarquía tipográfica y llamadas a la acción para una navegación más clara.',
+          },
+          {
+            title: 'Proceso de pago',
+            description: 'Rápido, accesible y sin rodeos',
+          },
+        ],
         color: '#C8272D'
       },
       {
         title: 'Faith Finder',
-        slug: 'project4',
+        slug: 'FaithFinder',
         shortDescription: 'Plataforma de búsqueda de versículos bíblicos',
-        description: 'Faith Finder es una plataforma que te permite buscar cualquier versículo de la Biblia simplemente escribiendo una palabra. Cuenta con filtros avanzados y opciones para que los usuarios agreguen versículos a sus favoritos. Además, ofrece un panel de administración para desbloquear usuarios y la opción de descargar tu capítulo favorito en formato PDF. Faith Finder es una aplicación de escritorio desarrollada con .NET y SQL Server.',
-        image: 'https://placehold.co/600x400',
+        description:
+          'Faith Finder es una aplicación de escritorio que permite buscar versículos de la Biblia mediante palabras clave. Ofrece un sistema de login y registro, filtros avanzados (idioma, versión, testamento, libro), historial de búsqueda, favoritos y descarga de capítulos en PDF. También cuenta con un panel administrativo para desbloquear cuentas bloqueadas. Fue desarrollada con .NET y SQL Server, utilizando procedimientos almacenados, triggers y vistas.',
+        features: [
+          {
+            title: 'Búsqueda inteligente',
+            description: 'Encuentra versículos de forma rápida escribiendo una palabra clave.',
+          },
+          {
+            title: 'Filtros avanzados',
+            description: 'Filtra resultados por idioma, versión, testamento, libro, capítulo o versículo para una búsqueda precisa.',
+          },
+          {
+            title: 'Favoritos y PDF',
+            description: 'Guarda versículos importantes y descarga capítulos completos en formato PDF.',
+          },
+          {
+            title: 'Gestión de usuarios',
+            description: 'Panel administrativo para desbloquear cuentas bloqueadas por errores de contraseña.',
+          }
+        ],
         color: '#F6DFB4'
       }
+
     ]
   }
 };

@@ -6,11 +6,12 @@ const { t, lang } = Astro.props;
 import instacatMain from "../assets/instacat/login.webp";
 import timHortonsMain from "../assets/interfaces/dash2.webp";
 import faithFinderMain from "../assets/faithFinder/busqueda.webp";
+import type TimHortons from "../pages/[lang]/projects/TimHortons.astro";
 const imageMap = {
     project1: "https://via.placeholder.co/600x400",
-    project2: instacatMain,
-    project3: timHortonsMain,
-    project4: faithFinderMain,
+    Instacat: instacatMain,
+    TimHortons: timHortonsMain,
+    FaithFinder: faithFinderMain,
     project5: "https://via.placeholder.co/600x400",
     project6: "https://via.placeholder.co/600x400",
 };
