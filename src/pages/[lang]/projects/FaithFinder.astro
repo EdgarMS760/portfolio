@@ -21,22 +21,37 @@ export function getStaticPaths() {
 }
 ---
 
-
 <ProjectsLayout lang={lang} t={t}>
     <div
         id="animated-bg"
         class="fixed inset-0 -z-10 bg-gradient-to-br from-orange-100 via-white to-orange-400"
-    ></div>
+    >
+    </div>
 
     <main class="relative overflow-x-hidden text-gray-900 dark:text-white">
-        <a href={`/${lang}`} class="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-black/60 backdrop-blur-md text-indigo-700 dark:text-indigo-300 font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        <a
+            href={`/${lang}`}
+            class="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-black/60 backdrop-blur-md text-black font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
             </svg>
             Volver
         </a>
 
-        <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20">
+        <section
+            class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20"
+        >
             <h1 class="text-5xl lg:text-6xl font-extrabold mb-6 hero-title">
                 {project.title}
             </h1>
@@ -45,35 +60,77 @@ export function getStaticPaths() {
             </p>
         </section>
 
-        <section class="min-h-screen flex flex-col items-center justify-center px-6 py-24 login-panel">
-            <h2 class="text-4xl font-bold mb-4 login-title">Login y favoritos</h2>
+        <section
+            class="min-h-screen flex flex-col items-center justify-center px-6 py-24 login-panel"
+        >
+            <h2 class="text-4xl font-bold mb-4 login-title">
+                Login y favoritos
+            </h2>
             <p class="text-lg max-w-xl mb-8 login-text">
                 Ingreso seguro, historial de búsqueda, favoritos personales.
             </p>
             <div class="flex flex-wrap gap-6 justify-center login-imgs">
-                <Image src={login} alt="Login" width={800} height={800} class="rounded-2xl shadow-xl zoomable" />
-                <Image src={login} alt="Favoritos" width={800} height={800} class="rounded-2xl shadow-xl zoomable" />
+                <Image
+                    src={login}
+                    alt="Login"
+                    width={800}
+                    height={800}
+                    class="rounded-2xl shadow-xl zoomable"
+                />
+                <Image
+                    src={login}
+                    alt="Favoritos"
+                    width={800}
+                    height={800}
+                    class="rounded-2xl shadow-xl zoomable"
+                />
             </div>
         </section>
 
-        <section class="min-h-screen flex flex-col items-center justify-center px-6 py-24 filters-panel">
-            <h2 class="text-4xl font-bold mb-4 filters-title">Filtros Avanzados</h2>
+        <section
+            class="min-h-screen flex flex-col items-center justify-center px-6 py-24 filters-panel"
+        >
+            <h2 class="text-4xl font-bold mb-4 filters-title">
+                Filtros Avanzados
+            </h2>
             <p class="text-lg max-w-xl mb-8 filters-text">
                 Filtra por testamento, versión, idioma o libro con facilidad.
             </p>
             <div class="flex flex-wrap gap-6 justify-center filters-imgs">
-                <Image src={busqueda} alt="Filtros" width={800} height={800} class="rounded-2xl shadow-xl zoomable" />
+                <Image
+                    src={busqueda}
+                    alt="Filtros"
+                    width={800}
+                    height={800}
+                    class="rounded-2xl shadow-xl zoomable"
+                />
             </div>
         </section>
 
-        <section class="min-h-screen flex flex-col items-center justify-center px-6 py-24 pdf-panel">
-            <h2 class="text-4xl font-bold mb-4 pdf-title">Exportar PDF y Admin</h2>
+        <section
+            class="min-h-screen flex flex-col items-center justify-center px-6 py-24 pdf-panel"
+        >
+            <h2 class="text-4xl font-bold mb-4 pdf-title">
+                Exportar PDF y Admin
+            </h2>
             <p class="text-lg max-w-xl mb-8 pdf-text">
                 Exporta tus capítulos favoritos, administra usuarios bloqueados.
             </p>
             <div class="flex flex-wrap gap-6 justify-center pdf-imgs">
-                <Image src={panelAdmin} alt="Descarga PDF" width={800} height={800} class="rounded-2xl shadow-xl zoomable" />
-                <Image src={panelAdmin} alt="Admin panel" width={800} height={800} class="rounded-2xl shadow-xl zoomable" />
+                <Image
+                    src={panelAdmin}
+                    alt="Descarga PDF"
+                    width={800}
+                    height={800}
+                    class="rounded-2xl shadow-xl zoomable"
+                />
+                <Image
+                    src={panelAdmin}
+                    alt="Admin panel"
+                    width={800}
+                    height={800}
+                    class="rounded-2xl shadow-xl zoomable"
+                />
             </div>
         </section>
     </main>
@@ -85,9 +142,15 @@ export function getStaticPaths() {
         }
 
         @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
     </style>
 
@@ -98,9 +161,24 @@ export function getStaticPaths() {
 
         const panels = [
             { key: "hero", title: ".hero-title", text: ".hero-text" },
-            { key: "login", title: ".login-title", text: ".login-text", imgs: ".login-imgs img" },
-            { key: "filters", title: ".filters-title", text: ".filters-text", imgs: ".filters-imgs img" },
-            { key: "pdf", title: ".pdf-title", text: ".pdf-text", imgs: ".pdf-imgs img" },
+            {
+                key: "login",
+                title: ".login-title",
+                text: ".login-text",
+                imgs: ".login-imgs img",
+            },
+            {
+                key: "filters",
+                title: ".filters-title",
+                text: ".filters-text",
+                imgs: ".filters-imgs img",
+            },
+            {
+                key: "pdf",
+                title: ".pdf-title",
+                text: ".pdf-text",
+                imgs: ".pdf-imgs img",
+            },
         ];
 
         panels.forEach(({ title, text, imgs }) => {
@@ -132,6 +210,14 @@ export function getStaticPaths() {
                 });
             }
         });
+        window.addEventListener("DOMContentLoaded", () => {
+            if (window.mediumZoom) {
+                mediumZoom(".zoomable", {
+                    background: "rgba(0, 0, 0, 0.7)",
+                    margin: 24,
+                    scrollOffset: 40,
+                });
+            }
+        });
     </script>
 </ProjectsLayout>
-

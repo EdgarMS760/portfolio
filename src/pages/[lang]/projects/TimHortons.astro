@@ -130,8 +130,17 @@ export function getStaticPaths() {
         class="fixed inset-0 bg-black/70 z-[9997] opacity-0 pointer-events-none transition-opacity duration-300"
     >
     </div>
-
+    <div
+        id="loader"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black"
+    >
+        <div
+            class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"
+        >
+        </div>
+    </div>
     <main
+        id="project-content"
         class="text-white overflow-x-hidden relative"
         style={`background: linear-gradient(to bottom, ${project.color}, black)`}
     >
@@ -170,7 +179,9 @@ export function getStaticPaths() {
                 >
                     {project.description}
                 </p>
-                <div class="filter invert flex items-center justify-center gap-4 mt-4">
+                <div
+                    class="filter invert flex items-center justify-center gap-4 mt-4"
+                >
                     <Image
                         src={react}
                         alt="React"
@@ -214,7 +225,9 @@ export function getStaticPaths() {
 
         <section class="bg-transparent panel login-panel">
             <div class="panel-content">
-                <h2 class="text-5xl font-bold login-title">{project.features[0].title}</h2>
+                <h2 class="text-5xl font-bold login-title">
+                    {project.features[0].title}
+                </h2>
                 <p class="text-xl max-w-2xl mx-auto mt-6 login-text">
                     {project.features[0].description}
                 </p>
@@ -239,7 +252,9 @@ export function getStaticPaths() {
 
         <section class="bg-transparent panel dash-panel">
             <div class="panel-content">
-                <h2 class="text-5xl font-bold dash-title">{project.features[1].title}</h2>
+                <h2 class="text-5xl font-bold dash-title">
+                    {project.features[1].title}
+                </h2>
                 <p class="text-xl max-w-2xl mx-auto mt-6 dash-text">
                     {project.features[1].description}
                 </p>
@@ -285,7 +300,9 @@ export function getStaticPaths() {
 
         <section class="bg-transparent panel pay-panel">
             <div class="panel-content">
-                <h2 class="text-5xl font-bold pay-title">{project.features[2].title}</h2>
+                <h2 class="text-5xl font-bold pay-title">
+                    {project.features[2].title}
+                </h2>
                 <p class="text-xl max-w-2xl mx-auto mt-6 pay-text">
                     {project.features[2].description}
                 </p>
@@ -300,6 +317,13 @@ export function getStaticPaths() {
                     <Image
                         src={pago2}
                         alt="Pago Pantalla 2"
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={pago3}
+                        alt="Pago Pantalla 3"
                         class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
                         width={2000}
                         height={2000}
@@ -377,10 +401,23 @@ export function getStaticPaths() {
                     scale: 0.9,
                     stagger: 0.2,
                     duration: 0.7,
-                    delay: 0.3,
+                    delay: 0.1,
                     ease: "expo.out",
                 });
             }
+        });
+         window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            const content = document.getElementById("project-content");
+
+            // Ocultar loader y mostrar contenido
+            gsap.to(loader, {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => loader.remove(),
+            });
+
+         
         });
     </script>
     <script>

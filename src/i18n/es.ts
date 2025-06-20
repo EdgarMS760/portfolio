@@ -17,13 +17,17 @@ export default {
         slug: 'project1',
         shortDescription: 'Aplicación web de gestión de tareas y notas',
         description: 'Descripción breve del proyecto 1.',
-        color: '#1E40AF'
+        color: '#1E40AF',
+        github: 'https://github.com/EdgarMS760/studify_front',
+        web: ''
       },
       {
         title: 'instacat',
         slug: 'Instacat',
         shortDescription: 'plataforma web tipo blog',
         description: 'InstaCat es una plataforma web tipo blog que te permite realizar publicaciones, editarlas y seguir a otros usuarios para ver sus perfiles. Para construir el sitio, se utilizó Tailwind CSS para el frontend, Java para la lógica de programación y MySQL para la base de datos.',
+        github: '',
+        web: '',
         features: [{
           title: `Feed principal`,
           description: `El feed principal de InstaCat es el corazón de la plataforma, diseñado para ofrecer una experiencia interactiva para los usuarios. Aquí puedes:
@@ -75,7 +79,9 @@ export default {
         shortDescription: 'Rediseño de la página de Tim Hortons México',
         description:
           'Siguiendo principios y patrones UX/UI, se realizó un rediseño del sitio web de Tim Hortons México para mejorar la experiencia de usuario. Este rediseño se realizó utilizando React para el frontend, asegurando una interfaz dinámica y responsiva, y Python con el framework Flask para el backend para operaciones sencillas como autenticación y envío de correos electrónicos. El resultado es una plataforma más intuitiva y atractiva que facilita la navegación y mejora la interacción del usuario con los servicios y productos de Tim Hortons México.',
-        features: [
+        github: '',
+        web: '',
+          features: [
           {
             title: 'Inicio de sesión & Registro',
             description: 'Una experiencia de inicio de sesión sencilla, visualmente atractiva y centrada en el usuario.',
@@ -97,7 +103,9 @@ export default {
         shortDescription: 'Plataforma de búsqueda de versículos bíblicos',
         description:
           'Faith Finder es una aplicación de escritorio que permite buscar versículos de la Biblia mediante palabras clave. Ofrece un sistema de login y registro, filtros avanzados (idioma, versión, testamento, libro), historial de búsqueda, favoritos y descarga de capítulos en PDF. También cuenta con un panel administrativo para desbloquear cuentas bloqueadas. Fue desarrollada con .NET y SQL Server, utilizando procedimientos almacenados, triggers y vistas.',
-        features: [
+        github: '',
+        web: '',
+          features: [
           {
             title: 'Búsqueda inteligente',
             description: 'Encuentra versículos de forma rápida escribiendo una palabra clave.',

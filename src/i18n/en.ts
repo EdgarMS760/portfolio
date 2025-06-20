@@ -16,13 +16,17 @@ export default {
         title: 'Studify',
         slug: 'project1',
         description: 'Descripción breve del proyecto 1.',
-        color: '#1E40AF'
+        color: '#1E40AF',
+        github: '',
+        web: '',
       },
       {
         title: 'instacat',
         slug: 'Instacat',
         shortDescription: ' blog-like web platform ',
         description: 'InstaCat is a blog-like web platform that allows you to make posts, edit them and follow other users to view their profiles. To build the site, Tailwind CSS was used for the frontend, Java for the programming logic and MySQL for the database. With InstaCat, you can enjoy an engaging experience while sharing your posts and connecting with other users.',
+        github: 'https://github.com/EdgarMS760/studify_front',
+        web: '',
         features: [{
           title: `Main Feed`,
           description: `The main feed of InstaCat is the heart of the platform, designed to offer an interactive experience for users. Here you can:
@@ -77,6 +81,8 @@ export default {
         shortDescription: 'Redesign of the Tim Hortons Mexico website',
         description:
           'Following UX/UI principles and patterns, a redesign of the Tim Hortons Mexico website was carried out to improve the user experience. The redesign was implemented using React for the frontend, ensuring a dynamic and responsive interface, and Python with the Flask framework for the backend, handling basic operations such as authentication and email services. The result is a more intuitive and visually appealing platform that enhances navigation and user interaction with Tim Hortons Mexico’s products and services.',
+        github: '',
+        web: '',
         features: [
           {
             title: 'Login & Register',
@@ -99,6 +105,8 @@ export default {
         shortDescription: 'Bible verse search platform',
         description:
           'Faith Finder is a desktop application that lets users search Bible verses by typing keywords. It features login and registration, advanced filters (language, version, testament, book), search history, favorites, and PDF chapter download. It also includes an admin panel to unlock blocked accounts. Built with .NET and SQL Server using stored procedures, triggers, and views.',
+        github: '',
+        web: '',
         features: [
           {
             title: 'Smart search',

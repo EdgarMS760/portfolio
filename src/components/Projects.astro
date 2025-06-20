@@ -6,7 +6,8 @@ const { t, lang } = Astro.props;
 import instacatMain from "../assets/instacat/login.webp";
 import timHortonsMain from "../assets/interfaces/dash2.webp";
 import faithFinderMain from "../assets/faithFinder/busqueda.webp";
-import type TimHortons from "../pages/[lang]/projects/TimHortons.astro";
+import web from "../assets/iconos/web.svg";
+import GitHub from "../assets/iconos/GitHub.svg";
 const imageMap = {
     project1: "https://via.placeholder.co/600x400",
     Instacat: instacatMain,
@@ -66,7 +67,68 @@ const imageMap = {
                         >
                             Ver más
                         </button>
-
+                        <div class="flex justify-center mt-4 filter dark:invert">
+                            {project.github ? (
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block"
+                                >
+                                    <Image
+                                        src={GitHub}
+                                        alt="GitHub Icon"
+                                        class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                </a>
+                            ) : (
+                                <div
+                                    class="mr-4 w-10 h-10 sm:w-12 sm:h-12 opacity-40 cursor-not-allowed"
+                                    aria-disabled="true"
+                                    title="Repositorio no disponible"
+                                >
+                                    <Image
+                                        src={GitHub}
+                                        alt="GitHub Icon deshabilitado"
+                                        class="w-full h-full"
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                </div>
+                            )}
+                            {project.web ? (
+                                <a
+                                    href={project.web}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block"
+                                >
+                                    <Image
+                                        src={web}
+                                        alt="web Icon"
+                                        class=" mr-4 w-14 h-14 sm:w-14 sm:h-14 cursor-pointer hover:scale-110 transition-transform duration-300"
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                </a>
+                            ) : (
+                                <div
+                                    class=" mr-4 w-14 h-14 sm:w-14 sm:h-14 opacity-40 cursor-not-allowed"
+                                    aria-disabled="true"
+                                    title="Repositorio no disponible"
+                                >
+                                    <Image
+                                        src={web}
+                                        alt="web Icon deshabilitado"
+                                        class="w-full h-full"
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                </div>
+                            )}
+                        </div>
                         <div
                             class="mt-4 max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
                             data-detail
@@ -232,7 +294,6 @@ const imageMap = {
         transition:
             box-shadow 0.4s ease,
             transform 0.4s ease;
-        cursor: pointer;
         will-change: transform, box-shadow;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     }
