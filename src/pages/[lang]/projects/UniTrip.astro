@@ -1,0 +1,259 @@
+---
+import type { Language } from "../../../types/language.type";
+import ProjectsLayout from "../../../layouts/ProjectsLayout.astro";
+import es from "../../../i18n/es";
+import en from "../../../i18n/en";
+
+import "../../../styles/global.css";
+import { Image } from "astro:assets";
+
+import login from "../../../assets/unitrip/login.webp";
+import register from "../../../assets/unitrip/register.webp";
+import feed from "../../../assets/unitrip/feed.webp";
+import createPost from "../../../assets/unitrip/createPost.webp";
+import createPost2 from "../../../assets/unitrip/createPost2.webp";
+import draftPost from "../../../assets/unitrip/draftPost.webp";
+import editPost from "../../../assets/unitrip/editPost.webp";
+import postSearchAndOrderBy from "../../../assets/unitrip/postSearchAndOrderBy.webp";
+import chats from "../../../assets/unitrip/chats.webp";
+import chatDetail from "../../../assets/unitrip/chatDetail.webp";
+import chatDetailExtern from "../../../assets/unitrip/chatDetailExtern.webp";
+import profile from "../../../assets/unitrip/profile.webp";
+import editProfile from "../../../assets/unitrip/editProfile.webp";
+import unitriplogo from "../../../assets/unitrip/unitripLogo.png";
+
+import kotlin from "../../../assets/iconos/Kotlin.svg";
+import androidStudio from "../../../assets/iconos/AndroidStudio.svg";
+import MySQL from "../../../assets/iconos/MySQL.svg";
+const lang = Astro.params.lang as Language;
+const translations: Record<Language, typeof es> = { es, en };
+const t = translations[lang];
+const project = t.projects.detail.find((p) => p.slug === "UniTrip");
+if (!project) throw new Error("No se encontró el proyecto UniTrip");
+export function getStaticPaths() {
+    return [
+        { params: { lang: "es", slug: "UniTrip" } },
+        { params: { lang: "en", slug: "UniTrip" } },
+    ];
+}
+---
+
+<ProjectsLayout lang={lang} t={t}>
+    <main class="bg-[#141416] text-white relative overflow-x-hidden">
+         <a
+            href={`/${lang}`}
+            class="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-black/60 backdrop-blur-md text-black font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+            {lang === "es" ? "Volver" : "Back"}
+        </a>
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-[#0c0c0c] to-[#1f1f1f] -z-10"
+        >
+        </div>
+
+        <section class="text-center py-24 px-6">
+            <Image
+                src={unitriplogo}
+                alt="Unitrip Logo"
+                class="mx-auto w-64 h-64 mb-6 animate-bounce"
+                loading="eager"
+            />
+            <p class="max-w-2xl mx-auto text-gray-300 text-lg">
+                {project.description}
+            </p>
+
+             <div
+                    class="flex items-center justify-center gap-4 mt-4"
+                >
+                    <Image
+                        src={kotlin}
+                        alt="Kotlin"
+                        title="Kotlin"
+                        class="w-16 h-16"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                    <Image
+                        src={androidStudio}
+                        alt="Android Studio"
+                        title="Android Studio"
+                        class="w-16 h-16"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                    <Image
+                        src={MySQL}
+                        alt="MySQL"
+                        title="MySQL"
+                        class="w-16 h-16 filter invert"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                </div>
+        </section>
+
+        <!-- LOGIN & REGISTER -->
+        <section class="py-20 px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                {project.features[0].title}
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-300 text-lg mb-8 text-center">
+                {project.features[0].description}
+            </p>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto"
+            >
+                <Image
+                    src={login}
+                    alt="Login"
+                    class="rounded-xl shadow-2xl zoomable"
+                />
+                <Image
+                    src={register}
+                    alt="Registro"
+                    class="rounded-xl shadow-2xl zoomable"
+                />
+            </div>
+        </section>
+
+        <!-- FEED & POSTS -->
+        <section class="py-20 px-6 bg-[#1a1a1a]">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                {project.features[1].title}
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-300 text-lg mb-8 text-center">
+                {project.features[1].description}
+            </p>
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            >
+                <Image
+                    src={feed}
+                    alt="Feed"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Image
+                        src={createPost}
+                        alt="Crear post"
+                        class="rounded-xl shadow-xl zoomable"
+                    />
+                    <Image
+                        src={createPost2}
+                        alt="Crear post 2"
+                        class="rounded-xl shadow-xl zoomable"
+                    />
+                    <Image
+                        src={draftPost}
+                        alt="Borrador"
+                        class="rounded-xl shadow-xl zoomable"
+                    />
+                    <Image
+                        src={editPost}
+                        alt="Editar post"
+                        class="rounded-xl shadow-xl zoomable"
+                    />
+                </div>
+                <Image
+                    src={postSearchAndOrderBy}
+                    alt="Buscar y ordenar"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+            </div>
+        </section>
+
+        <!-- CHATS -->
+        <section class="py-20 px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">{project.features[2].title}</h2>
+            <p class="max-w-2xl mx-auto text-gray-300 text-lg mb-8 text-center">
+                {project.features[2].description}
+            </p>
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            >
+                <Image
+                    src={chats}
+                    alt="Lista de chats"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+                <Image
+                    src={chatDetail}
+                    alt="Detalle chat interno"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+                <Image
+                    src={chatDetailExtern}
+                    alt="Detalle chat externo"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+            </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section class="py-20 px-6 bg-[#1a1a1a]">
+            <h2 class="text-3xl font-bold text-center mb-12">{project.features[3].title}</h2>
+            <p class="max-w-2xl mx-auto text-gray-300 text-lg mb-8 text-center">
+                {project.features[3].description}
+            </p>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto"
+            >
+                <Image
+                    src={profile}
+                    alt="Perfil"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+                <Image
+                    src={editProfile}
+                    alt="Editar perfil"
+                    class="rounded-xl shadow-xl zoomable"
+                />
+            </div>
+        </section>
+    </main>
+
+    <script>
+        import gsap from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray("section").forEach((section, index) => {
+            gsap.from(section, {
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                },
+            });
+        });
+
+         window.addEventListener("DOMContentLoaded", () => {
+            if (window.mediumZoom) {
+                mediumZoom(".zoomable", {
+                    background: "rgba(0, 0, 0, 0.7)",
+                    margin: 24,
+                    scrollOffset: 40
+                });
+            }
+        });
+    </script>
+</ProjectsLayout>

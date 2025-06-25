@@ -1,0 +1,95 @@
+---
+import perfil from "../assets/avatar/avatar.webp";
+const { t } = Astro.props;
+import GitHub from "../assets/iconos/GitHub.svg";
+import Linkedin from "../assets/iconos/Linkedin.svg";
+import cv from "../assets/iconos/cv.svg";
+---
+
+<section
+  id="hero"
+  class="flex flex-col md:flex-row items-center justify-center pt-16 px-6 lg:px-20 max-w-screen-xl mx-auto opacity-0 gap-10 lg:gap-20"
+>
+  <div id="hero-image" class="">
+    <img
+      src={perfil.src}
+      alt="Foto de perfil"
+      class="w-48 h-48 lg:w-64 lg:h-64 rounded-full shadow-lg transition-transform duration-500 hover:scale-105"
+    />
+  </div>
+  <div id="hero-text" class="flex-1 text-center md:text-left">
+    <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
+      {t.home.title}
+    </h1>
+    <p class="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
+      {t.home.description}
+    </p>
+    <div class="flex filter justify-center dark:invert">
+      <a
+        href="https://github.com/EdgarMS760"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={GitHub.src}
+          alt="GitHub Icon"
+          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+        />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/edgar-francisco-martinez-sandoval-0a8449207"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={Linkedin.src}
+          alt="LinkedIn Icon"
+          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+        />
+      </a>
+      <a href={t.cv} target="_blank" rel="noopener noreferrer">
+        <img
+          src={cv.src}
+          alt="CV Icon"
+          class="w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
+        />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  import { gsap } from "gsap";
+
+window.addEventListener("DOMContentLoaded", () => {
+  const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
+
+  tl.to("#hero", { opacity: 1, scale: 1, duration: 0.8 });
+
+  tl.from("#hero-image img", {
+    opacity: 0,
+    duration: 1.2,
+    ease: "back.out(1.7)",
+  }, "-=0.5");
+
+  tl.from("#hero-text h1", {
+    x: -100,
+    opacity: 0,
+  }, "-=1");
+
+  tl.from("#hero-text p", {
+    x: 100,
+    opacity: 0,
+  }, "-=1");
+
+  tl.from("#hero-text a", {
+    scale: 0,
+    opacity: 0,
+    stagger: 0.2,
+    duration: 0.5,
+    ease: "elastic.out(1, 0.5)"
+  }, "-=0.8");
+});
+
+</script>

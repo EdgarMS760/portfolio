@@ -1,0 +1,446 @@
+---
+import es from "../../../i18n/es";
+import en from "../../../i18n/en";
+import type { Language } from "../../../types/language.type";
+import "../../../styles/global.css";
+import ProjectsLayout from "../../../layouts/ProjectsLayout.astro";
+import dash1 from "../../../assets/interfaces/dash1.webp";
+import dash2 from "../../../assets/interfaces/dash2.webp";
+import dash3 from "../../../assets/interfaces/dash3.webp";
+import dash4 from "../../../assets/interfaces/dash4.webp";
+import dash5 from "../../../assets/interfaces/dash5.webp";
+import login from "../../../assets/interfaces/login.webp";
+import register from "../../../assets/interfaces/register.webp";
+import pago1 from "../../../assets/interfaces/pago1.webp";
+import pago2 from "../../../assets/interfaces/pago2.webp";
+import pago3 from "../../../assets/interfaces/pago3.webp";
+import logo from "../../../assets/interfaces/Tim_Hortons_Logo_White.png";
+import react from "../../../assets/iconos/React.svg";
+import python from "../../../assets/iconos/Python.svg";
+import flask from "../../../assets/iconos/Flask.svg";
+import { Image } from "astro:assets";
+
+const lang = Astro.params.lang as Language;
+const translations: Record<Language, typeof es> = { es, en };
+const t = translations[lang];
+const project = t.projects.detail.find((p) => p.slug === "TimHortons");
+if (!project) throw new Error("No se encontró el proyecto 'TimHortons'");
+export function getStaticPaths() {
+    return [
+        { params: { lang: "es", slug: "TimHortons" } },
+        { params: { lang: "en", slug: "TimHortons" } },
+    ];
+}
+---
+
+<style>
+    html {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+    }
+
+    section {
+        scroll-snap-align: start;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 6rem 1.5rem;
+        overflow: hidden;
+        position: relative;
+        transition: background 1s ease;
+    }
+
+    .panel-content {
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    .section-images {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .section-images img {
+        max-width: 480px;
+        width: 100%;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s ease;
+    }
+
+    .section-images img:hover {
+        transform: scale(1.05);
+    }
+
+    .return-btn {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        color: black;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-weight: bold;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .return-btn:hover {
+        transform: scale(1.05) translateX(4px);
+        background: #f3f3f3;
+    }
+
+    .return-btn svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .overlay-gradient {
+        position: absolute;
+        inset: 0;
+        opacity: 0.2;
+        background: radial-gradient(circle, white 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    .medium-zoom-overlay {
+        z-index: 9998 !important;
+    }
+
+    .medium-zoom-image--opened {
+        z-index: 9999 !important;
+        position: relative;
+    }
+</style>
+
+<ProjectsLayout lang={lang} t={t}>
+    <div
+        id="zoom-overlay"
+        class="fixed inset-0 bg-black/70 z-[9997] opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+    </div>
+    <div
+        id="loader"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black"
+    >
+        <div
+            class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"
+        >
+        </div>
+    </div>
+    <main
+        id="project-content"
+        class="text-white overflow-x-hidden relative"
+        style={`background: linear-gradient(to bottom, ${project.color}, black)`}
+    >
+        <a href={`/${lang}`} class="return-btn">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+            {lang === "es" ? "Volver" : "Back"}
+        </a>
+
+        <section class="relative bg-transparent panel">
+            <div class="panel-content">
+                <div
+                    class="flex flex-col items-center mt-12 space-y-2 reveal-up delay-4"
+                >
+                    <Image
+                        src={logo}
+                        alt="Logo Tim Hortons"
+                        class="max-w-64 h-auto object-contain rounded-full h-24 sm:h-24 border-t-4 border-white"
+                        width="1000"
+                        height="1000"
+                        loading="eager"
+                    />
+                </div>
+                <p
+                    class="mt-6 max-w-2xl mx-auto text-lg lg:text-xl opacity-90 hero-text"
+                >
+                    {project.description}
+                </p>
+                <div
+                    class="filter invert flex items-center justify-center gap-4 mt-4"
+                >
+                    <Image
+                        src={react}
+                        alt="React"
+                        title="React"
+                        class="w-12 h-12"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                    <Image
+                        src={python}
+                        alt="Python"
+                        title="Python"
+                        class="w-12 h-12"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                    <Image
+                        src={flask}
+                        alt="Flask"
+                        title="Flask"
+                        class="w-12 h-12"
+                        width={48}
+                        height={48}
+                        loading={"eager"}
+                    />
+                </div>
+                <div class="hero-img mt-12 max-w-4xl mx-auto">
+                    <Image
+                        src={dash2}
+                        alt="main Tim Hortons"
+                        class="zoomable zoom-effect rounded-2xl shadow-2xl"
+                        width={2000}
+                        height={2000}
+                        loading={"eager"}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-transparent panel login-panel">
+            <div class="panel-content">
+                <h2 class="text-5xl font-bold login-title">
+                    {project.features[0].title}
+                </h2>
+                <p class="text-xl max-w-2xl mx-auto mt-6 login-text">
+                    {project.features[0].description}
+                </p>
+                <div class="section-images login-imgs">
+                    <Image
+                        src={login}
+                        alt="Login Pantalla 1"
+                        width={1000}
+                        height={1000}
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                    />
+                    <Image
+                        src={register}
+                        alt="Registro Pantalla 2"
+                        width={1000}
+                        height={1000}
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-transparent panel dash-panel">
+            <div class="panel-content">
+                <h2 class="text-5xl font-bold dash-title">
+                    {project.features[1].title}
+                </h2>
+                <p class="text-xl max-w-2xl mx-auto mt-6 dash-text">
+                    {project.features[1].description}
+                </p>
+                <div class="section-images dash-imgs">
+                    <Image
+                        src={dash1}
+                        alt="Dashboard Pantalla 1"
+                        class={"zoomable rounded-2xl shadow-2xl"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={dash2}
+                        alt="Dashboard Pantalla 2"
+                        class={"zoomable rounded-2xl shadow-2xl"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={dash3}
+                        alt="Dashboard Pantalla 3"
+                        class={"zoomable rounded-2xl shadow-2xl"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={dash4}
+                        alt="Dashboard Pantalla 4"
+                        class={"zoomable rounded-2xl shadow-2xl"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={dash5}
+                        alt="Dashboard Pantalla 5"
+                        class={"zoomable rounded-2xl shadow-2xl"}
+                        width={2000}
+                        height={2000}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-transparent panel pay-panel">
+            <div class="panel-content">
+                <h2 class="text-5xl font-bold pay-title">
+                    {project.features[2].title}
+                </h2>
+                <p class="text-xl max-w-2xl mx-auto mt-6 pay-text">
+                    {project.features[2].description}
+                </p>
+                <div class="section-images pay-imgs">
+                    <Image
+                        src={pago1}
+                        alt="Pago Pantalla 1"
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={pago2}
+                        alt="Pago Pantalla 2"
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        width={2000}
+                        height={2000}
+                    />
+                    <Image
+                        src={pago3}
+                        alt="Pago Pantalla 3"
+                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        width={2000}
+                        height={2000}
+                    />
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        import gsap from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const secciones = [
+            { key: "hero", trigger: ".hero-title", text: ".hero-text" },
+            {
+                key: "login",
+                trigger: ".login-title",
+                text: ".login-text",
+                imgs: ".login-imgs img",
+            },
+            {
+                key: "dash",
+                trigger: ".dash-title",
+                text: ".dash-text",
+                imgs: ".dash-imgs img",
+            },
+            {
+                key: "pay",
+                trigger: ".pay-title",
+                text: ".pay-text",
+                imgs: ".pay-imgs img",
+            },
+        ];
+
+        secciones.forEach(({ trigger, text, imgs }) => {
+            // Animación título
+            gsap.from(trigger, {
+                scrollTrigger: {
+                    trigger,
+                    start: "top 80%",
+                    once: true,
+                },
+                opacity: 0,
+                y: -80,
+                duration: 1,
+                ease: "power3.out",
+            });
+
+            // Animación texto
+            gsap.from(text, {
+                scrollTrigger: {
+                    trigger,
+                    start: "top 85%",
+                    once: true,
+                },
+                opacity: 0,
+                y: 40,
+                delay: 0.2,
+                duration: 1,
+                ease: "power3.out",
+            });
+
+            if (imgs) {
+                // Animación imágenes al entrar
+                gsap.from(imgs, {
+                    scrollTrigger: {
+                        trigger: imgs,
+                        start: "top 85%",
+                        once: true,
+                    },
+                    opacity: 0,
+                    scale: 0.9,
+                    stagger: 0.2,
+                    duration: 0.7,
+                    delay: 0.1,
+                    ease: "expo.out",
+                });
+            }
+        });
+         window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            const content = document.getElementById("project-content");
+
+            // Ocultar loader y mostrar contenido
+            gsap.to(loader, {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => loader.remove(),
+            });
+
+         
+        });
+    </script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const zoom = mediumZoom(".zoomable", {
+                background: "transparent",
+                margin: 24,
+                scrollOffset: 40,
+            });
+
+            const overlay = document.getElementById("zoom-overlay");
+
+            zoom.on("open", () => {
+                overlay.style.opacity = "1";
+                overlay.style.pointerEvents = "auto";
+            });
+
+            zoom.on("close", () => {
+                setTimeout(() => {
+                    overlay.style.opacity = "0";
+                    overlay.style.pointerEvents = "none";
+                }, 100);
+            });
+        });
+    </script>
+</ProjectsLayout>

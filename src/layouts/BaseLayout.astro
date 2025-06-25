@@ -1,0 +1,40 @@
+---
+import TopControls from '../components/TopControls.astro';
+const { lang, t } = Astro.props;
+const languages = [
+  { code: "es", label: t.languageOptions.es },
+  { code: "en", label: t.languageOptions.en }
+];
+
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edgar Martinez</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+  </head>
+  <body class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+    <TopControls currentLang={lang} languages={languages} />
+
+
+    <main class="min-h-screen">
+      <slot />
+    </main>
+
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        }
+      }
+    </script>
+  </body>
+</html>
