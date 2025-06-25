@@ -1,3 +1,27 @@
 	@import "tailwindcss";
 
    @custom-variant dark (&:where(.dark, .dark *));
+   .embla {
+  position: relative;
+}
+
+.embla__container {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.embla__slide {
+  position: relative;
+  min-width: 100%;
+}
+
+.embla__dots button {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: #a3a3a3;
+  transition: background-color 0.3s;
+}
+.embla__dots button.bg-indigo-600 {
+  background-color: #4f46e5;
+}

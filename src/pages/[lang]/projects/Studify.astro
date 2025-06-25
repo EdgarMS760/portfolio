@@ -1,0 +1,665 @@
+---
+import es from "../../../i18n/es";
+import en from "../../../i18n/en";
+import type { Language } from "../../../types/language.type";
+import "../../../styles/global.css";
+import ProjectsLayout from "../../../layouts/ProjectsLayout.astro";
+import { Image } from "astro:assets";
+import react from "../../../assets/iconos/React.svg";
+import tailwind from "../../../assets/iconos/Tailwind.svg";
+import mongodb from "../../../assets/iconos/MongoDB.svg";
+import nodejs from "../../../assets/iconos/NodeJS.svg";
+import openai from "../../../assets/iconos/OpenAI.svg";
+import firebase from "../../../assets/iconos/Firebase.svg";
+import logo from "../../../assets/studify/logo.png";
+import studimate from "../../../assets/studify/alumno/studimate.webp";
+import darkmode from "../../../assets/studify/darkmode.webp";
+import lightmode from "../../../assets/studify/lightmode.webp";
+import loginGoogle from "../../../assets/studify/loginGoogle.webp";
+import registro from "../../../assets/studify/registro.webp";
+import inicioLight from "../../../assets/studify/maestro/inicioLight.webp";
+import calendario from "../../../assets/studify/alumno/calendario.webp";
+import materialesAlumno from "../../../assets/studify/alumno/materialesAlumno.webp";
+import muroAlumno from "../../../assets/studify/alumno/muroAlumno.webp";
+import subirTarea from "../../../assets/studify/alumno/subirTarea.webp";
+import tareasAlumno from "../../../assets/studify/alumno/tareasAlumno.webp";
+
+import inicioDark from "../../../assets/studify/maestro/inicioDark.webp";
+import asistenciaNo from "../../../assets/studify/maestro/asistenciaNo.webp";
+import asistenciaSi from "../../../assets/studify/maestro/asistenciaSi.webp";
+import materiales from "../../../assets/studify/maestro/materiales.webp";
+import muro from "../../../assets/studify/maestro/muro.webp";
+
+import reportesMain from "../../../assets/studify/maestro/reportesMain.webp";
+import reporteAsistencia from "../../../assets/studify/maestro/reporteAsistencia.webp";
+import reporteTareas from "../../../assets/studify/maestro/reporteTareas.webp";
+
+import revisionGeneral from "../../../assets/studify/maestro/revisionGeneral.webp";
+import revisionPdf from "../../../assets/studify/maestro/revisionPdf.webp";
+import tareasExpiradas from "../../../assets/studify/maestro/tareasExpiradas.webp";
+import tareasProximas from "../../../assets/studify/maestro/tareasProximas.webp";
+const lang = Astro.params.lang as Language;
+const translations: Record<Language, typeof es> = { es, en };
+const t = translations[lang];
+const project = t.projects.detail.find((p) => p.slug === "Studify");
+if (!project) throw new Error("No se encontró el proyecto 'Studify'");
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: "es", slug: "Studify" } },
+        { params: { lang: "en", slug: "Studify" } },
+    ];
+}
+---
+
+<ProjectsLayout lang={lang} t={t}>
+    <div
+        id="animated-bg"
+        class="fixed inset-0 -z-10 bg-gradient-to-br from-orange-400 via-white to-orange-500"
+    >
+    </div>
+
+    <main class="relative text-gray-900 dark:text-white overflow-x-hidden">
+        <a
+            href={`/${lang}`}
+            class="fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white text-black shadow-md rounded-full border border-black hover:bg-orange-700 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+            <span class="font-semibold"
+                >{lang === "es" ? "Volver" : "Back"}</span
+            >
+        </a>
+
+        <section class="text-center py-16 px-6">
+            <div
+                class="flex flex-col items-center mt-12 space-y-2 reveal-up delay-4"
+            >
+                <Image
+                    src={logo}
+                    alt="Logo studify"
+                    class="max-w-48 h-auto object-contain rounded-full h-24 sm:h-24 border-t-4 border-white"
+                    width="1000"
+                    height="1000"
+                    loading="eager"
+                />
+            </div>
+            <p
+                class="text-xl max-w-3xl mx-auto"
+                set:html={project.description}
+            />
+            <div class="flex items-center justify-center gap-4 my-4">
+                <Image
+                    src={react}
+                    alt="React"
+                    title="React"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+                <Image
+                    src={tailwind}
+                    alt="Tailwind CSS"
+                    title="Tailwind CSS"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+                <Image
+                    src={mongodb}
+                    alt="MongoDB"
+                    title="MongoDB"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+                <Image
+                    src={nodejs}
+                    alt="Node.js"
+                    title="Node.js"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+                <Image
+                    src={openai}
+                    alt="OpenAI"
+                    title="OpenAI"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+                <Image
+                    src={firebase}
+                    alt="Firebase"
+                    title="Firebase"
+                    class="w-12 h-12"
+                    width={1000}
+                    height={1000}
+                    loading={"eager"}
+                />
+            </div>
+            <div
+                class="relative max-w-3xl mx-auto overflow-hidden rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-700"
+            >
+                <Image
+                    src={inicioLight}
+                    alt={project.title}
+                    class="zoomable w-full object-cover"
+                    width="1000"
+                    height="1000"
+                    loading="eager"
+                />
+            </div>
+        </section>
+        <section id="common-features" class="py-12 px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <p
+                    class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 common-text"
+                >
+                    {lang === 'es' ? 'Studify incluye herramientas esenciales para todos los usuarios que mejoran la accesibilidad, seguridad y experiencia.' : ' Studify includes essential tools for all users that improve accessibility, security and experience.'}
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 common-grid">
+                    <div
+                        class="bg-gray-100 p-6 rounded-2xl shadow-lg transition hover:scale-105 duration-300"
+                    >
+                        <h3 class="text-2xl font-semibold text-black mb-2">
+                            🔐 {project.features.general[0].title}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            {project.features.general[0].description}
+                        </p>
+                        <Image
+                            src={loginGoogle}
+                            alt="Login con Google"
+                            title="Login con Google"
+                            class="zoomable rounded-lg shadow-md mt-4"
+                            width={1000}
+                            height={1000}
+                        />
+                    </div>
+
+                    <div
+                        class="bg-gray-100 p-6 rounded-2xl shadow-lg transition hover:scale-105 duration-300"
+                    >
+                        <h3 class="text-2xl font-semibold text-black mb-2">
+                            👤 {project.features.general[1].title}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            {project.features.general[1].description}
+                        </p>
+                        <Image
+                            src={registro}
+                            alt="Registro"
+                            title="Registro"
+                            class="zoomable rounded-lg shadow-md mt-4"
+                            width={1000}
+                            height={1000}
+                        />
+                    </div>
+
+                    <div
+                        class="bg-gray-100 p-6 rounded-2xl shadow-lg transition hover:scale-105 duration-300 md:col-span-2"
+                    >
+                        <h3 class="text-2xl font-semibold text-black mb-2">
+                            💡 {project.features.general[2].title}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            {project.features.general[2].description}   
+                        </p>
+                        <two-up class="mt-4">
+                            <Image
+                                src={darkmode}
+                                alt="Modo oscuro"
+                                class="rounded-lg shadow-md"
+                            />
+                            <Image
+                                src={lightmode}
+                                alt="Modo claro"
+                                class="rounded-lg shadow-md"
+                            />
+                        </two-up>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Switch de rol -->
+        <div class="flex justify-center items-center py-12">
+            <span class="animate-ping-slow text-xl text-indigo-500 mr-4"
+                >👉</span
+            >
+            <button
+                id="role-toggle"
+                class="cursor-pointer group relative bg-white dark:bg-gray-800 border-2 border-orange-500 rounded-full px-8 py-3 shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-orange-500/50 flex items-center gap-3"
+            >
+                <span
+                    id="role-label"
+                    class="relative z-10 text-lg font-bold text-black group-hover:scale-105 transition-transform duration-300"
+                >
+                    👨‍🎓 Alumno
+                </span>
+
+                <span
+                    class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-100 via-transparent to-purple-100 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"
+                ></span>
+            </button>
+        </div>
+
+        <!-- Secciones -->
+        <section class="max-w-6xl mx-auto px-4 space-y-24 pb-24">
+            <!-- ALUMNO -->
+            <div id="student-features" class="space-y-20 role-section">
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.student[0].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.student[0].description}
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <Image
+                            src={studimate}
+                            alt="Chatbot"
+                            title="Chatbot"
+                            class="rounded-2xl shadow-2xl zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="md:flex gap-12 items-center feature-block flex-row-reverse"
+                >
+                    <div class="md:w-1/2 space-y-4 text-left md:text-right">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.student[1].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.student[1].description}
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <Image
+                            src={calendario}
+                            alt="Calendario"
+                            title="Calendario"
+                            class="rounded-2xl shadow-2xl zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.student[2].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.student[2].description}
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <Image
+                            src={muroAlumno}
+                            alt="Muro de grupo"
+                            title="Muro de grupo"
+                            class="rounded-2xl shadow-2xl zoomable mb-4"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={materialesAlumno}
+                            alt="materiales de alumno"
+                            title="materiales de alumno"
+                            class="rounded-2xl shadow-2xl zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="md:flex gap-12 items-center feature-block flex-row-reverse"
+                >
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.student[3].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.student[3].description}
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <Image
+                            src={tareasAlumno}
+                            alt="Lista de tareas"
+                            title="Lista de tareas"
+                            class="rounded-2xl shadow-2xl zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4 text-left md:text-right">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.student[4].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.student[4].description}
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <Image
+                            src={subirTarea}
+                            alt="Subida de tareas"
+                            title="Subida de tareas"
+                            class="rounded-2xl shadow-2xl zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAESTRO -->
+            <div id="teacher-features" class="space-y-20 role-section hidden">
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.teacher[0].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.teacher[0].description}
+                        </p>
+                    </div>
+                    <div
+                        class="md:w-1/2 grid sm:grid-cols-2 gap-4 mt-6 md:mt-0"
+                    >
+                        <Image
+                            src={inicioDark}
+                            alt="Inicio Maestro"
+                            class="rounded-xl shadow-lg zoomable w-64 w-64"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={muro}
+                            alt="Muro Maestro"
+                            class="rounded-xl shadow-lg zoomable w-64 w-64"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="md:flex gap-12 items-center feature-block flex-row-reverse"
+                >
+                    <div class="md:w-1/2 space-y-4 text-left md:text-right">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.teacher[1].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.teacher[1].description}
+                        </p>
+                    </div>
+                    <div
+                        class="md:w-1/2 grid sm:grid-cols-2 gap-4 mt-6 md:mt-0"
+                    >
+                        <Image
+                            src={materiales}
+                            alt="Materiales"
+                            class="rounded-xl shadow-lg zoomable w-64 w-64"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={tareasProximas}
+                            alt="Tareas próximas"
+                            class="rounded-xl shadow-lg zoomable w-64 w-64"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.teacher[2].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.teacher[2].description}
+                        </p>
+                    </div>
+                    <div
+                        class="md:w-1/2 grid sm:grid-cols-2 gap-4 mt-6 md:mt-0"
+                    >
+                        <Image
+                            src={reportesMain}
+                            alt="Reportes"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={reporteAsistencia}
+                            alt="Reporte asistencia"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={reporteTareas}
+                            alt="Reporte tareas"
+                            class="rounded-xl shadow-lg zoomable sm:col-span-2"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="md:flex gap-12 items-center feature-block flex-row-reverse"
+                >
+                    <div class="md:w-1/2 space-y-4 text-left md:text-right">
+                        <h3 class="text-3xl font-bold text-black">
+                            {project.features.teacher[3].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.teacher[3].description}
+                        </p>
+                    </div>
+                    <div
+                        class="md:w-1/2 grid sm:grid-cols-2 gap-4 mt-6 md:mt-0"
+                    >
+                        <Image
+                            src={revisionGeneral}
+                            alt="Revisión general"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={revisionPdf}
+                            alt="Revisión PDF"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={tareasExpiradas}
+                            alt="Tareas expiradas"
+                            class="rounded-xl shadow-lg zoomable sm:col-span-2"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+
+                <div class="md:flex gap-12 items-center feature-block">
+                    <div class="md:w-1/2 space-y-4">
+                        <h3 class="text-3xl font-bold text-black">
+                           {project.features.teacher[4].title}
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {project.features.teacher[4].description}
+                        </p>
+                    </div>
+                    <div
+                        class="md:w-1/2 grid sm:grid-cols-2 gap-4 mt-6 md:mt-0"
+                    >
+                        <Image
+                            src={asistenciaSi}
+                            alt="Asistencia Sí"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                        <Image
+                            src={asistenciaNo}
+                            alt="Asistencia No"
+                            class="rounded-xl shadow-lg zoomable"
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        #animated-bg {
+            background-size: 400% 400%;
+            animation: gradientMove 20s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .role-section {
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
+        }
+
+        .role-section.hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+        }
+        @keyframes ping-slow {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        .animate-ping-slow {
+            animation: ping-slow 2s infinite;
+        }
+        .medium-zoom-overlay,
+        .medium-zoom-image--opened {
+            z-index: 11 !important;
+        }
+    </style>
+
+    <script>
+        import "two-up-element";
+        import gsap from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+        gsap.registerPlugin(ScrollTrigger);
+
+        const toggle = document.getElementById("role-toggle");
+        const label = document.getElementById("role-label");
+        const student = document.getElementById("student-features");
+        const teacher = document.getElementById("teacher-features");
+
+        toggle.addEventListener("click", () => {
+            const isStudent = !student.classList.contains("hidden");
+
+            gsap.to(isStudent ? student : teacher, {
+                opacity: 0,
+                y: 50,
+                duration: 0.3,
+                onComplete: () => {
+                    (isStudent ? student : teacher).classList.add("hidden");
+                    (isStudent ? teacher : student).classList.remove("hidden");
+                    label.textContent = isStudent ? "👩‍🏫 Maestro" : "👨‍🎓 Alumno";
+
+                    gsap.fromTo(
+                        isStudent ? teacher : student,
+                        { opacity: 0, y: -40 },
+                        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+                    );
+                },
+            });
+        });
+
+        document.querySelectorAll(".feature-block").forEach((block, i) => {
+            gsap.from(block, {
+                scrollTrigger: {
+                    trigger: block,
+                    start: "top 80%",
+                },
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                delay: i * 0.1,
+                ease: "power3.out",
+            });
+        });
+        window.addEventListener("DOMContentLoaded", () => {
+            if (window.mediumZoom) {
+                mediumZoom(".zoomable", {
+                    background: "rgba(0, 0, 0, 0.7)",
+                    margin: 24,
+                    scrollOffset: 40
+                });
+            }
+        });
+    </script>
+</ProjectsLayout>

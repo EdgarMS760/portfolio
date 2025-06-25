@@ -265,7 +265,7 @@ export function getStaticPaths() {
                 delay: 0.5,
             });
 
-            // ScrollReveal para cada sección con la clase .reveal-up
+            // ScrollReveal
             gsap.utils.toArray(".reveal-up").forEach((el, i) => {
                 gsap.from(el, {
                     scrollTrigger: {
