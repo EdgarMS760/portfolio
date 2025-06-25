@@ -140,7 +140,6 @@ const imageMap = {
             const text = project.querySelector("[data-project-text]");
             const btn = project.querySelector("[data-project-btn]");
             const color = project.dataset.color || "#000000";
-            console.log(`Color for project ${index + 1}:`, color);
 
             const hexToRGBA = (hex, alpha = 0.4) => {
                 const bigint = parseInt(hex.replace("#", ""), 16);
@@ -151,7 +150,6 @@ const imageMap = {
             };
 
             const shadowColor = hexToRGBA(color, 0.5);
-            console.log("shadowColor:", shadowColor);
             // Listener de click para redirigir
             if (btn) {
                 btn.addEventListener("click", () => {
