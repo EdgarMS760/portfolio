@@ -232,7 +232,14 @@ export function getStaticPaths() {
             <div
                 class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
             >
-               
+               <div class="space-y-4 reveal">
+                    <h2 class="text-3xl font-bold">
+                        {project.features[1].title}
+                    </h2>
+                    <p class="text-white">
+                        {project.features[1].description}
+                    </p>
+                </div>
                 <div class="grid grid-cols-1 gap-4 reveal">
                     <Image
                         src={dash1}
@@ -250,14 +257,7 @@ export function getStaticPaths() {
                         class="rounded-xl shadow-lg zoomable"
                     />
                 </div>
-                <div class="space-y-4 reveal">
-                    <h2 class="text-3xl font-bold">
-                        {project.features[1].title}
-                    </h2>
-                    <p class="text-white">
-                        {project.features[1].description}
-                    </p>
-                </div>
+                
             </div>
         </section>
 
