@@ -125,26 +125,8 @@ export function getStaticPaths() {
 </style>
 
 <ProjectsLayout lang={lang} t={t}>
-    <div
-        id="zoom-overlay"
-        class="fixed inset-0 bg-black/70 z-[9997] opacity-0 pointer-events-none transition-opacity duration-300"
-    >
-    </div>
-    <div
-        id="loader"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black"
-    >
-        <div
-            class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"
-        >
-        </div>
-    </div>
-    <main
-        id="project-content"
-        class="text-white overflow-x-hidden relative"
-        style={`background: linear-gradient(to bottom, ${project.color}, black)`}
-    >
-        <a href={`/${lang}`} class="return-btn">
+    <main style={`background: linear-gradient(to bottom, ${project.color}, black)`}>
+         <a href={`/${lang}`} class="return-btn">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -159,27 +141,20 @@ export function getStaticPaths() {
             </svg>
             {lang === "es" ? "Volver" : "Back"}
         </a>
+        <section
+            class="min-h-screen px-6 py-20 text-white text-center relative overflow-hidden"
+        >
+            <Image
+                loading="eager"
+                src={logo}
+                alt="Tim Hortons logo"
+                class="mx-auto w-96 mb-8 reveal"
+            />
 
-        <section class="relative bg-transparent panel">
-            <div class="panel-content">
-                <div
-                    class="flex flex-col items-center mt-12 space-y-2 reveal-up delay-4"
-                >
-                    <Image
-                        src={logo}
-                        alt="Logo Tim Hortons"
-                        class="max-w-64 h-auto object-contain rounded-full h-24 sm:h-24 border-t-4 border-white"
-                        width="1000"
-                        height="1000"
-                        loading="eager"
-                    />
-                </div>
-                <p
-                    class="mt-6 max-w-2xl mx-auto text-lg lg:text-xl opacity-90 hero-text"
-                >
-                    {project.description}
-                </p>
-                <div
+            <p class="mt-6 text-md max-w-3xl mx-auto reveal">
+               {project.description}
+            </p>
+              <div
                     class="filter invert flex items-center justify-center gap-4 mt-4"
                 >
                     <Image
@@ -210,237 +185,147 @@ export function getStaticPaths() {
                         loading={"eager"}
                     />
                 </div>
-                <div class="hero-img mt-12 max-w-4xl mx-auto">
-                    <Image
-                        src={dash2}
-                        alt="main Tim Hortons"
-                        class="zoomable zoom-effect rounded-2xl shadow-2xl"
-                        width={2000}
-                        height={2000}
-                        loading={"eager"}
-                    />
-                </div>
-            </div>
+            <Image
+                loading="eager"
+                src={dash2}
+                alt="Tim Hortons dash2"
+                class="mx-auto my-8 reveal rounded-xl shadow-lg zoomable"
+                width={800}
+                height={600}
+            />
         </section>
 
-        <section class="bg-transparent panel login-panel">
-            <div class="panel-content">
-                <h2 class="text-5xl font-bold login-title">
-                    {project.features[0].title}
-                </h2>
-                <p class="text-xl max-w-2xl mx-auto mt-6 login-text">
-                    {project.features[0].description}
-                </p>
-                <div class="section-images login-imgs">
+        <section
+            class="px-6 py-20 text-white"
+        >
+            <div
+                class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
+            >
+                <div class="space-y-4 reveal">
+                    <h2 class="text-3xl font-bold">
+                        {project.features[0].title}
+                    </h2>
+                    <p class="text-white">
+                        {project.features[0].description}
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col gap-6 justify-center items-center reveal"
+                >
                     <Image
                         src={login}
-                        alt="Login Pantalla 1"
-                        width={1000}
-                        height={1000}
-                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        alt="Login"
+                        class="rounded-xl shadow-lg zoomable"
                     />
                     <Image
                         src={register}
-                        alt="Registro Pantalla 2"
-                        width={1000}
-                        height={1000}
-                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
+                        alt="Registro"
+                        class="rounded-xl shadow-lg zoomable"
                     />
                 </div>
             </div>
         </section>
 
-        <section class="bg-transparent panel dash-panel">
-            <div class="panel-content">
-                <h2 class="text-5xl font-bold dash-title">
-                    {project.features[1].title}
-                </h2>
-                <p class="text-xl max-w-2xl mx-auto mt-6 dash-text">
-                    {project.features[1].description}
-                </p>
-                <div class="section-images dash-imgs">
+        <section
+            class="px-6 py-20 text-white"
+        >
+            <div
+                class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
+            >
+               
+                <div class="grid grid-cols-1 gap-4 reveal">
                     <Image
                         src={dash1}
-                        alt="Dashboard Pantalla 1"
-                        class={"zoomable rounded-2xl shadow-2xl"}
-                        width={2000}
-                        height={2000}
+                        alt="Inicio 1"
+                        class="rounded-xl shadow-lg zoomable"
                     />
                     <Image
                         src={dash2}
-                        alt="Dashboard Pantalla 2"
-                        class={"zoomable rounded-2xl shadow-2xl"}
-                        width={2000}
-                        height={2000}
+                        alt="Inicio 2"
+                        class="rounded-xl shadow-lg zoomable"
                     />
                     <Image
                         src={dash3}
-                        alt="Dashboard Pantalla 3"
-                        class={"zoomable rounded-2xl shadow-2xl"}
-                        width={2000}
-                        height={2000}
+                        alt="Inicio 3"
+                        class="rounded-xl shadow-lg zoomable"
                     />
-                    <Image
-                        src={dash4}
-                        alt="Dashboard Pantalla 4"
-                        class={"zoomable rounded-2xl shadow-2xl"}
-                        width={2000}
-                        height={2000}
-                    />
-                    <Image
-                        src={dash5}
-                        alt="Dashboard Pantalla 5"
-                        class={"zoomable rounded-2xl shadow-2xl"}
-                        width={2000}
-                        height={2000}
-                    />
+                </div>
+                <div class="space-y-4 reveal">
+                    <h2 class="text-3xl font-bold">
+                        {project.features[1].title}
+                    </h2>
+                    <p class="text-white">
+                        {project.features[1].description}
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="bg-transparent panel pay-panel">
-            <div class="panel-content">
-                <h2 class="text-5xl font-bold pay-title">
-                    {project.features[2].title}
-                </h2>
-                <p class="text-xl max-w-2xl mx-auto mt-6 pay-text">
-                    {project.features[2].description}
-                </p>
-                <div class="section-images pay-imgs">
+        <section
+            class="px-6 py-20 text-white"
+        >
+            <div
+                class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
+            >
+                <div class="space-y-4 reveal">
+                    <h2 class="text-3xl font-bold">{project.features[2].title}</h2>
+                    <p class="text-white">
+                        {project.features[2].description}
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 gap-4 reveal">
                     <Image
                         src={pago1}
-                        alt="Pago Pantalla 1"
-                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
-                        width={2000}
-                        height={2000}
+                        alt="Pago 1"
+                        class="rounded-xl shadow-lg w-full h-auto zoomable"
                     />
                     <Image
                         src={pago2}
-                        alt="Pago Pantalla 2"
-                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
-                        width={2000}
-                        height={2000}
+                        alt="Pago 2"
+                        class="rounded-xl shadow-lg w-full h-auto zoomable"
                     />
                     <Image
                         src={pago3}
-                        alt="Pago Pantalla 3"
-                        class={"zoomable rounded-2xl shadow-2xl zoom-effect"}
-                        width={2000}
-                        height={2000}
+                        alt="Pago 3"
+                        class="rounded-xl shadow-lg w-full h-auto zoomable"
                     />
                 </div>
             </div>
         </section>
     </main>
-
     <script>
         import gsap from "gsap";
         import { ScrollTrigger } from "gsap/ScrollTrigger";
-
         gsap.registerPlugin(ScrollTrigger);
 
-        const secciones = [
-            { key: "hero", trigger: ".hero-title", text: ".hero-text" },
-            {
-                key: "login",
-                trigger: ".login-title",
-                text: ".login-text",
-                imgs: ".login-imgs img",
-            },
-            {
-                key: "dash",
-                trigger: ".dash-title",
-                text: ".dash-text",
-                imgs: ".dash-imgs img",
-            },
-            {
-                key: "pay",
-                trigger: ".pay-title",
-                text: ".pay-text",
-                imgs: ".pay-imgs img",
-            },
-        ];
+        const revealElements = document.querySelectorAll(".reveal");
 
-        secciones.forEach(({ trigger, text, imgs }) => {
-            // Animación título
-            gsap.from(trigger, {
-                scrollTrigger: {
-                    trigger,
-                    start: "top 80%",
-                    once: true,
-                },
-                opacity: 0,
-                y: -80,
-                duration: 1,
-                ease: "power3.out",
-            });
-
-            // Animación texto
-            gsap.from(text, {
-                scrollTrigger: {
-                    trigger,
-                    start: "top 85%",
-                    once: true,
-                },
-                opacity: 0,
-                y: 40,
-                delay: 0.2,
-                duration: 1,
-                ease: "power3.out",
-            });
-
-            if (imgs) {
-                // Animación imágenes al entrar
-                gsap.from(imgs, {
+        revealElements.forEach((el, i) => {
+            gsap.fromTo(
+                el,
+                { opacity: 0, y: 60, scale: 0.97 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power3.out",
                     scrollTrigger: {
-                        trigger: imgs,
+                        trigger: el,
                         start: "top 85%",
-                        once: true,
+                        toggleActions: "play none none none",
                     },
-                    opacity: 0,
-                    scale: 0.9,
-                    stagger: 0.2,
-                    duration: 0.7,
-                    delay: 0.1,
-                    ease: "expo.out",
+                },
+            );
+        });
+        window.addEventListener("DOMContentLoaded", () => {
+            if (window.mediumZoom) {
+                mediumZoom(".zoomable", {
+                    background: "rgba(0, 0, 0, 0.7)",
+                    margin: 24,
+                    scrollOffset: 40,
                 });
             }
-        });
-         window.addEventListener("load", () => {
-            const loader = document.getElementById("loader");
-            const content = document.getElementById("project-content");
-
-            // Ocultar loader y mostrar contenido
-            gsap.to(loader, {
-                opacity: 0,
-                duration: 1,
-                onComplete: () => loader.remove(),
-            });
-
-         
-        });
-    </script>
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const zoom = mediumZoom(".zoomable", {
-                background: "transparent",
-                margin: 24,
-                scrollOffset: 40,
-            });
-
-            const overlay = document.getElementById("zoom-overlay");
-
-            zoom.on("open", () => {
-                overlay.style.opacity = "1";
-                overlay.style.pointerEvents = "auto";
-            });
-
-            zoom.on("close", () => {
-                setTimeout(() => {
-                    overlay.style.opacity = "0";
-                    overlay.style.pointerEvents = "none";
-                }, 100);
-            });
         });
     </script>
 </ProjectsLayout>
