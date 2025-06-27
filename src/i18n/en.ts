@@ -1,5 +1,5 @@
 export default {
-  cv: "https://drive.google.com/file/d/1xr7y79zusVpMXEPaag6pB9uxBwVz988b/view?usp=sharing",
+  cv: "https://drive.google.com/file/d/1tDGC6O1lVYEEYpx4VLtkv232nm5-Op3Y/view?usp=sharing",
   languageOptions: {
     es: "Spanish",
     en: "English"
