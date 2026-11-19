@@ -255,7 +255,7 @@ export default {
     eyebrow: "Data Engineering",
     title: "Real-world cases",
     subtitle:
-      "Systems I built for companies that are running in production today. Names and code are omitted for confidentiality.",
+      "Systems I built for companies that are running in production today.",
     items: [
       {
         industry: "Employee transportation",
@@ -381,9 +381,10 @@ export default {
         text: ".NET REST APIs and Artemis message queues between distributed systems.",
       },
     ],
+    viewCredential: "View credential",
     credentialsTitle: "Certifications & achievements",
     credentials: [
-      { title: "Agentic AI Engineer Nanodegree", org: "Udacity", date: "Oct 2026" },
+      { title: "Agentic AI Engineer Nanodegree", org: "Udacity", date: "Oct 2026", url: "https://www.udacity.com/certificate/e/bed60066-900d-11f1-90e4-87e7ef3009f9" },
       { title: "AWS AI Practitioner Challenge", org: "Udacity", date: "Apr 2026" },
       {
         title: "IBM Hackathon · watsonx Orchestrate",
