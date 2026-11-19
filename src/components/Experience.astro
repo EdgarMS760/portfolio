@@ -37,17 +37,28 @@ const e = t.experience;
       <h3 class="text-xl font-bold mb-5" data-reveal>{e.credentialsTitle}</h3>
       <div class="space-y-3" data-reveal-stagger>
         {
-          e.credentials.map((c) => (
-            <div class="flex items-start gap-4 rounded-2xl p-4 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 hover:border-blue-500 hover:translate-x-1 transition">
-              <span class="mt-0.5 text-xl">🏅</span>
-              <div>
-                <p class="font-semibold leading-snug">{c.title}</p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  {c.org} · {c.date}
-                </p>
-              </div>
-            </div>
-          ))
+          e.credentials.map((c) => {
+            const Tag = c.url ? "a" : "div";
+            return (
+              <Tag
+                {...(c.url ? { href: c.url, target: "_blank", rel: "noopener noreferrer" } : {})}
+                class="group flex items-start gap-4 rounded-2xl p-4 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 hover:border-blue-500 hover:translate-x-1 transition"
+              >
+                <span class="mt-0.5 text-xl">🏅</span>
+                <div class="flex-1">
+                  <p class="font-semibold leading-snug">{c.title}</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    {c.org} · {c.date}
+                  </p>
+                </div>
+                {c.url && (
+                  <span class="self-center text-sm font-semibold text-blue-600 dark:text-blue-400 whitespace-nowrap group-hover:translate-x-0.5 transition-transform">
+                    {e.viewCredential} ↗
+                  </span>
+                )}
+              </Tag>
+            );
+          })
         }
       </div>
     </div>

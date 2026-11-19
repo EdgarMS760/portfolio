@@ -255,7 +255,7 @@ export default {
     eyebrow: "Data Engineering",
     title: "Casos reales",
     subtitle:
-      "Sistemas que construí en empresas y que hoy están en producción. Por confidencialidad omito nombres y código.",
+      "Sistemas que construí en empresas y que hoy están en producción.",
     items: [
       {
         industry: "Transporte de personal",
@@ -381,9 +381,10 @@ export default {
         text: "REST APIs en .NET y colas de mensajes con Artemis entre sistemas distribuidos.",
       },
     ],
+    viewCredential: "Ver credencial",
     credentialsTitle: "Certificaciones y logros",
     credentials: [
-      { title: "Agentic AI Engineer Nanodegree", org: "Udacity", date: "Oct 2026" },
+      { title: "Agentic AI Engineer Nanodegree", org: "Udacity", date: "Oct 2026", url: "https://www.udacity.com/certificate/e/bed60066-900d-11f1-90e4-87e7ef3009f9" },
       { title: "AWS AI Practitioner Challenge", org: "Udacity", date: "Abr 2026" },
       {
         title: "Hackathon IBM · watsonx Orchestrate",
