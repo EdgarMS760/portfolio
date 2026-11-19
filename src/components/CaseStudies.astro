@@ -1,0 +1,120 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+const { t } = Astro.props;
+const c = t.cases;
+const tabs = [
+  { key: "problem", label: t.common.problem },
+  { key: "solution", label: t.common.solution },
+  { key: "impact", label: t.common.impact },
+];
+---
+
+<section id="cases" class="scroll-mt-24 py-24 px-6 lg:px-20 max-w-screen-xl mx-auto">
+  <SectionHeader eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} />
+
+  <div class="grid lg:grid-cols-3 gap-6" data-reveal-stagger>
+    {
+      c.items.map((item) => (
+        <article
+          class="case-card group flex flex-col rounded-3xl p-6 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition duration-300"
+          style={`--accent: ${item.color};`}
+          data-case
+        >
+          <div class="h-1.5 w-16 rounded-full mb-5 transition-all duration-500 group-hover:w-full" style={`background: ${item.color}`} />
+          <p class="text-xs font-semibold uppercase tracking-widest mb-2" style={`color: ${item.color}`}>
+            {item.industry}
+          </p>
+          <h3 class="text-xl font-bold mb-5 leading-snug">{item.title}</h3>
+
+          <!-- Mini pipeline -->
+          <div class="flex flex-wrap items-center gap-1.5 mb-6">
+            {item.flow.map((step, i) => (
+              <span class="inline-flex items-center gap-1.5">
+                {i > 0 && <span class="case-arrow text-gray-400">→</span>}
+                <span class="px-2 py-1 rounded-md text-[11px] font-semibold bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+                  {step}
+                </span>
+              </span>
+            ))}
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex gap-1 p-1 rounded-xl bg-gray-100 dark:bg-gray-900 mb-4" role="tablist">
+            {tabs.map((tab, i) => (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                data-tab={tab.key}
+                class="case-tab flex-1 px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400 transition cursor-pointer"
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div class="relative flex-1 min-h-[11rem]">
+            <p data-panel="problem" class="case-panel text-gray-700 dark:text-gray-300 leading-relaxed">
+              {item.problem}
+            </p>
+            <p data-panel="solution" class="case-panel hidden text-gray-700 dark:text-gray-300 leading-relaxed">
+              {item.solution}
+            </p>
+            <ul data-panel="impact" class="case-panel hidden space-y-2">
+              {item.impact.map((imp) => (
+                <li class="flex gap-2 text-gray-700 dark:text-gray-300 leading-snug">
+                  <span class="mt-0.5 font-bold" style={`color: ${item.color}`}>✓</span>
+                  {imp}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 mt-5 pt-5 border-t border-gray-200 dark:border-gray-700">
+            {item.stack.map((s) => (
+              <span class="px-2 py-0.5 rounded text-xs font-medium bg-gray-900/5 dark:bg-white/10 text-gray-600 dark:text-gray-300">
+                {s}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .case-tab[aria-selected="true"] {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 14px -4px var(--accent);
+  }
+  .case-card:hover .case-arrow {
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { initReveal, prefersReducedMotion } from "../scripts/reveal";
+
+  document.querySelectorAll<HTMLElement>("[data-case]").forEach((card) => {
+    const tabs = card.querySelectorAll<HTMLButtonElement>("[data-tab]");
+    const panels = card.querySelectorAll<HTMLElement>("[data-panel]");
+    tabs.forEach((tab) =>
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+        panels.forEach((p) => {
+          const show = p.dataset.panel === tab.dataset.tab;
+          p.classList.toggle("hidden", !show);
+          if (show && !prefersReducedMotion()) {
+            gsap.fromTo(p, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+          }
+        });
+      }),
+    );
+  });
+
+  initReveal();
+</script>

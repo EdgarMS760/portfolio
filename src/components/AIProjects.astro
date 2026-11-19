@@ -1,0 +1,90 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+import ArchFlow from "./ArchFlow.astro";
+import GitHub from "../assets/iconos/GitHub.svg";
+
+const { t, lang } = Astro.props;
+const ai = t.ai;
+const MAX_TAGS = 6;
+---
+
+<section id="ai" class="scroll-mt-24 py-24 px-6 lg:px-20 max-w-screen-xl mx-auto">
+  <SectionHeader eyebrow={ai.eyebrow} title={ai.title} subtitle={ai.subtitle} />
+
+  <div class="space-y-16 lg:space-y-24">
+    {
+      ai.items.map((p, index) => {
+        const reverse = index % 2 !== 0;
+        return (
+          <article
+            class="ai-card relative rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-200/70 dark:border-gray-800 shadow-sm"
+            style={`background: linear-gradient(to ${reverse ? "left" : "right"}, ${p.color}40 0%, ${p.color}14 40%, transparent 75%); --accent: ${p.color};`}
+            data-reveal
+          >
+            <div class={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center`}>
+              <div class={reverse ? "md:order-2" : ""}>
+                <ArchFlow layers={p.flow} color={p.color} hint={t.common.flowHint} />
+              </div>
+
+              <div class={reverse ? "md:order-1" : ""}>
+                <p class="text-sm font-semibold mb-2" style={`color: ${p.color}`}>
+                  {p.subtitle}
+                </p>
+                <h3 class="text-2xl lg:text-4xl font-bold mb-4 leading-tight">{p.title}</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-base lg:text-lg leading-relaxed mb-6">{p.summary}</p>
+
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                  {p.metrics.map((m) => (
+                    <div class="rounded-xl p-3 bg-white/70 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700">
+                      <p class="text-lg lg:text-xl font-extrabold leading-tight" style={`color: ${p.color}`}>
+                        {m.value}
+                      </p>
+                      <p class="text-xs text-gray-600 dark:text-gray-400 leading-snug mt-1">{m.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-7">
+                  {p.stack.slice(0, MAX_TAGS).map((s) => (
+                    <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-gray-900/5 dark:bg-white/10 text-gray-700 dark:text-gray-300">
+                      {s}
+                    </span>
+                  ))}
+                  {p.stack.length > MAX_TAGS && (
+                    <span class="px-2.5 py-1 rounded-md text-xs font-medium text-gray-500">+{p.stack.length - MAX_TAGS}</span>
+                  )}
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                  <a
+                    href={`/${lang}/ai/${p.slug}`}
+                    class="ai-cta inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold shadow-lg hover:-translate-y-0.5 transition"
+                    style={`background: ${p.color}; box-shadow: 0 10px 25px -8px ${p.color};`}
+                  >
+                    {t.common.seeCase}
+                    <span class="transition-transform group-hover:translate-x-1">→</span>
+                  </a>
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 font-semibold hover:-translate-y-0.5 transition"
+                  >
+                    <img src={GitHub.src} alt="" class="w-5 h-5 dark:invert" />
+                    {t.common.code}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>
+
+<script>
+  import { initReveal, initTilt } from "../scripts/reveal";
+  initReveal();
+  initTilt(".ai-card", 2);
+</script>

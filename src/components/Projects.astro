@@ -4,36 +4,34 @@ import { Image } from "astro:assets";
 const { t, lang } = Astro.props;
 
 import instacatMain from "../assets/instacat/login.webp";
-import timHortonsMain from "../assets/interfaces/dash2.webp";
-import faithFinderMain from "../assets/faithFinder/busqueda.webp";
 import web from "../assets/iconos/web.svg";
 import GitHub from "../assets/iconos/GitHub.svg";
 import studimate from "../assets/studify/alumno/studimate.webp";
 import logoUnitrip from "../assets/unitrip/unitriplogo.png";
+import SectionHeader from "./SectionHeader.astro";
 const imageMap = {
     Studify: studimate,
     Instacat: instacatMain,
-    TimHortons: timHortonsMain,
-    FaithFinder: faithFinderMain,
     UniTrip: logoUnitrip
 };
 ---
 
 <section
     id="projects"
-    class="py-24 px-6 lg:px-20 max-w-screen-xl mx-auto space-y-32"
+    class="scroll-mt-24 py-24 px-6 lg:px-20 max-w-screen-xl mx-auto space-y-16 lg:space-y-24"
 >
-    <div class="text-center mb-16">
-        <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
-            {t.projects.title}
-        </h1>
-    </div>
+    <SectionHeader
+        eyebrow={t.softwareProjects.eyebrow}
+        title={t.softwareProjects.title}
+        subtitle={t.softwareProjects.subtitle}
+    />
 
     {
         t.projects.detail.map((project, index) => (
             <div
                 data-project
                 data-color={project.color}
+                class="rounded-3xl p-6 sm:p-8 lg:p-10"
                 style={`background: linear-gradient(to ${index % 2 !== 0 ? "left" : "right"}, ${project.color} 0%, ${project.color}33 40%, transparent 70%)`}
             >
                 <div
@@ -44,7 +42,7 @@ const imageMap = {
                     <Image
                         src={imageMap[project.slug]}
                         alt={project.title}
-                        class="w-full md:w-1/2 rounded-lg shadow-xl"
+                        class="w-full md:w-1/2 rounded-2xl shadow-xl"
                         data-project-image
                         width="1000"
                         height="1000"
@@ -60,21 +58,19 @@ const imageMap = {
                             {project.shortDescription}
                         </p>
                         <p class="text-gray-700 dark:text-gray-300 text-base lg:text-lg">
-                            {lang === "es"
-                                ? "Desarrollado con:"
-                                : "Developed with:"} <br />
+                            <span class="font-semibold">{t.common.developedWith}</span> <br />
                             {project.developWith}
                         </p>
 
                         <button
                             type="button"
-                            class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
+                            class="mt-5 inline-block px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition cursor-pointer"
                             data-project-btn
                             data-url={`/${lang}/projects/${project.slug}`}
                         >
-                            {lang === "es" ? "Ver más" : "See more"}
+                            {t.common.seeMore}
                         </button>
-                        <div class="flex justify-center mt-4 filter dark:invert">
+                        <div class="flex justify-center md:justify-start mt-4 filter dark:invert">
                             {project.github && (
                                 <a
                                     href={project.github}
@@ -188,20 +184,6 @@ const imageMap = {
                 },
                 "-=1.2",
             );
-
-            // Animación de salida al salirse del viewport
-            tl.to(project, {
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                ease: "power1.in",
-                scrollTrigger: {
-                    trigger: project,
-                    start: "bottom 20%",
-                    end: "bottom 0%",
-                    scrub: true,
-                },
-            });
 
             // Hover en card de proyecto
             project.addEventListener("mouseenter", () => {

@@ -1,95 +1,316 @@
 ---
 import perfil from "../assets/avatar/avatar.webp";
-const { t } = Astro.props;
 import GitHub from "../assets/iconos/GitHub.svg";
 import Linkedin from "../assets/iconos/LinkedIn.svg";
 import cv from "../assets/iconos/cv.svg";
+
+const { t } = Astro.props;
+const h = t.hero;
+
+const orbit = ["Bedrock", "RAG", "dbt", "MCP", "DuckDB", "AWS"];
+const marquee = [
+  "Amazon Bedrock",
+  "AgentCore",
+  "Strands Agents",
+  "RAG",
+  "MCP",
+  "Python",
+  "dbt",
+  "DuckDB",
+  "PostgreSQL",
+  "FastAPI",
+  ".NET",
+  "Docker",
+  "GitHub Actions",
+  "AWS",
+  "GCP",
+  "Cloudflare",
+  "React",
+  "Node.js",
+];
 ---
 
-<section
-  id="hero"
-  class="flex flex-col md:flex-row items-center justify-center pt-16 px-6 lg:px-20 max-w-screen-xl mx-auto opacity-0 gap-10 lg:gap-20"
->
-  <div id="hero-image" class="">
-    <img
-      src={perfil.src}
-      alt="Foto de perfil"
-      class="w-48 h-48 lg:w-64 lg:h-64 rounded-full shadow-lg transition-transform duration-500 hover:scale-105"
-    />
+<section id="hero" class="relative overflow-hidden">
+  <!-- Fondo: cuadrícula de puntos + manchas de color que siguen el cursor -->
+  <div class="hero-grid pointer-events-none absolute inset-0 opacity-60 dark:opacity-40"></div>
+  <div
+    id="hero-blob-a"
+    class="pointer-events-none absolute -top-32 -left-32 w-[28rem] h-[28rem] rounded-full bg-blue-500/25 dark:bg-blue-500/20 blur-3xl"
+  >
   </div>
-  <div id="hero-text" class="flex-1 text-center md:text-left">
-    <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
-      {t.home.title}
-    </h1>
-    <p class="text-lg lg:text-xl mb-4 text-gray-600 dark:text-gray-300">
-      {t.home.description}
-    </p>
-    <div class="flex filter justify-center dark:invert">
-      <a
-        href="https://github.com/EdgarMS760"
-        target="_blank"
-        rel="noopener noreferrer"
+  <div
+    id="hero-blob-b"
+    class="pointer-events-none absolute top-40 -right-24 w-[24rem] h-[24rem] rounded-full bg-violet-500/20 dark:bg-violet-500/20 blur-3xl"
+  >
+  </div>
+
+  <div
+    class="relative flex flex-col-reverse md:flex-row items-center justify-center pt-28 md:pt-32 pb-12 px-6 lg:px-20 max-w-screen-xl mx-auto gap-12 lg:gap-20"
+  >
+    <div id="hero-text" class="flex-1 text-center md:text-left">
+      <p
+        class="hero-item inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full text-sm font-semibold border border-blue-600/30 bg-blue-600/10 text-blue-700 dark:text-blue-300 dark:border-blue-400/30"
       >
-        <img
-          src={GitHub.src}
-          alt="GitHub Icon"
-          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
-        />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/edgar-francisco-martinez-sandoval-0a8449207"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={Linkedin.src}
-          alt="LinkedIn Icon"
-          class="mr-4 w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
-        />
-      </a>
-      <a href={t.cv} target="_blank" rel="noopener noreferrer">
-        <img
-          src={cv.src}
-          alt="CV Icon"
-          class="w-10 h-10 sm:w-12 sm:h-12 cursor-pointer hover:scale-110 transition-transform duration-300"
-        />
-      </a>
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        {h.badge}
+      </p>
+      <h1 class="hero-item text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-5 leading-[1.05] tracking-tight">
+        <span class="block text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-500 dark:text-gray-400 mb-2">
+          {h.greeting}
+        </span>
+        {h.name}
+      </h1>
+      <p class="hero-item text-xl lg:text-3xl font-bold mb-6 min-h-[2.5em] sm:min-h-[1.5em]">
+        {h.buildPrefix}{" "}
+        <span
+          id="hero-role"
+          class="bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 bg-clip-text text-transparent"
+          data-roles={JSON.stringify(h.roles)}>{h.roles[0]}</span
+        ><span class="hero-caret text-blue-600 dark:text-blue-400">|</span>
+      </p>
+      <p class="hero-item text-lg lg:text-xl mb-8 text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto md:mx-0">
+        {h.tagline}
+      </p>
+
+      <div class="hero-item flex flex-wrap gap-3 justify-center md:justify-start mb-8">
+        <a
+          href="#ai"
+          class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:-translate-y-0.5 transition"
+        >
+          {h.ctaPrimary} →
+        </a>
+        <a
+          href={t.cv}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-6 py-3 rounded-xl border border-gray-300 dark:border-gray-600 font-semibold hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 hover:-translate-y-0.5 transition"
+        >
+          {h.ctaSecondary}
+        </a>
+      </div>
+
+      <div class="hero-item flex justify-center md:justify-start gap-4 dark:invert">
+        <a href="https://github.com/EdgarMS760" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <img src={GitHub.src} alt="GitHub" class="w-10 h-10 hover:scale-110 transition-transform duration-300" />
+        </a>
+        <a href="https://www.linkedin.com/in/edgarms01" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src={Linkedin.src} alt="LinkedIn" class="w-10 h-10 hover:scale-110 transition-transform duration-300" />
+        </a>
+        <a href={t.cv} target="_blank" rel="noopener noreferrer" aria-label="CV">
+          <img src={cv.src} alt="CV" class="w-10 h-10 hover:scale-110 transition-transform duration-300" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Avatar con órbita de tecnologías -->
+    <div id="hero-image" class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 shrink-0">
+      <div class="absolute inset-0 rounded-full border border-dashed border-blue-600/30 dark:border-blue-400/30 hero-spin"></div>
+      <div class="absolute inset-8 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 blur-2xl opacity-30"></div>
+      <img
+        src={perfil.src}
+        alt="Edgar Martínez"
+        class="absolute inset-8 w-[calc(100%-4rem)] h-[calc(100%-4rem)] rounded-full shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-white dark:bg-gray-800 object-cover"
+      />
+      <div class="absolute inset-0 hero-spin">
+        {
+          orbit.map((label, i) => {
+            const angle = (360 / orbit.length) * i;
+            return (
+              <span
+                class="absolute left-1/2 top-1/2"
+                style={`transform: rotate(${angle}deg) translateY(calc(-50% - var(--orbit-r))) rotate(-${angle}deg);`}
+              >
+                <span class="hero-counter-spin block -translate-x-1/2 -translate-y-1/2 px-3 py-1 rounded-full text-xs font-bold bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-md whitespace-nowrap">
+                  {label}
+                </span>
+              </span>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Métricas -->
+  <div
+    id="hero-stats"
+    class="relative px-6 lg:px-20 max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4"
+  >
+    {
+      h.stats.map((s) => (
+        <div class="rounded-2xl p-5 bg-white/70 dark:bg-gray-800/60 backdrop-blur border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+          <p
+            class="text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 bg-clip-text text-transparent"
+            data-count={s.value}
+            data-decimals={s.decimals}
+            data-prefix={s.prefix}
+            data-suffix={s.suffix}
+          >
+            {`${s.prefix}${s.value.toFixed(s.decimals)}${s.suffix}`}
+          </p>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 leading-snug">{s.label}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Marquesina de tecnologías -->
+  <div class="relative mt-14 py-5 border-y border-gray-200 dark:border-gray-800 overflow-hidden marquee-mask">
+    <div class="marquee-track flex w-max gap-10">
+      {
+        [...marquee, ...marquee].map((tech) => (
+          <span class="text-lg font-semibold text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap">
+            {tech}
+          </span>
+        ))
+      }
     </div>
   </div>
 </section>
 
+<style>
+  .hero-grid {
+    background-image: radial-gradient(circle, rgb(148 163 184 / 0.35) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  #hero-image {
+    --orbit-r: 0px;
+  }
+  .hero-spin {
+    animation: spin 40s linear infinite;
+  }
+  .hero-counter-spin {
+    animation: spin 40s linear infinite reverse;
+  }
+  #hero-image:hover .hero-spin,
+  #hero-image:hover .hero-counter-spin {
+    animation-play-state: paused;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .hero-caret {
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+  .marquee-mask:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-spin,
+    .hero-counter-spin,
+    .marquee-track,
+    .hero-caret {
+      animation: none;
+    }
+  }
+</style>
+
 <script>
-
   import { gsap } from "gsap";
+  import { initReveal, prefersReducedMotion } from "../scripts/reveal";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
+  const reduce = prefersReducedMotion();
 
-  tl.to("#hero", { opacity: 1, scale: 1, duration: 0.8 });
+  // Entrada del hero
+  if (!reduce) {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.from("#hero-image", { opacity: 0, scale: 0.6, rotate: -20, duration: 1.2, ease: "back.out(1.6)" })
+      .from(".hero-item", { opacity: 0, y: 30, stagger: 0.1, duration: 0.8 }, "-=0.9")
+      .fromTo(
+        "#hero-stats > div",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, stagger: 0.08, duration: 0.6, clearProps: "opacity,transform" },
+        "-=0.5",
+      );
+  }
 
-  tl.from("#hero-image img", {
-    opacity: 0,
-    duration: 1.2,
-    ease: "back.out(1.7)",
-  }, "-=0.5");
+  // Radio de la órbita según el tamaño del avatar
+  const img = document.getElementById("hero-image");
+  const setRadius = () => img && img.style.setProperty("--orbit-r", `${img.offsetWidth / 2 - 4}px`);
+  setRadius();
+  window.addEventListener("resize", setRadius);
 
-  tl.from("#hero-text h1", {
-    x: -100,
-    opacity: 0,
-  }, "-=1");
+  // Manchas que siguen el cursor
+  if (!reduce && window.matchMedia("(hover: hover)").matches) {
+    const ax = gsap.quickTo("#hero-blob-a", "x", { duration: 1.2, ease: "power3" });
+    const ay = gsap.quickTo("#hero-blob-a", "y", { duration: 1.2, ease: "power3" });
+    const bx = gsap.quickTo("#hero-blob-b", "x", { duration: 1.8, ease: "power3" });
+    const by = gsap.quickTo("#hero-blob-b", "y", { duration: 1.8, ease: "power3" });
+    document.getElementById("hero")?.addEventListener("pointermove", (e) => {
+      const px = e.clientX / window.innerWidth - 0.5;
+      const py = e.clientY / window.innerHeight - 0.5;
+      ax(px * 120);
+      ay(py * 120);
+      bx(-px * 90);
+      by(-py * 90);
+    });
+  }
 
-  tl.from("#hero-text p", {
-    x: 100,
-    opacity: 0,
-  }, "-=1");
+  // Texto que se escribe solo
+  const roleEl = document.getElementById("hero-role");
+  if (roleEl && !reduce) {
+    const roles: string[] = JSON.parse(roleEl.dataset.roles || "[]");
+    let i = 0;
+    const type = async () => {
+      const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+      while (true) {
+        await sleep(2200);
+        const current = roles[i];
+        for (let n = current.length; n >= 0; n--) {
+          roleEl.textContent = current.slice(0, n);
+          await sleep(28);
+        }
+        i = (i + 1) % roles.length;
+        const next = roles[i];
+        for (let n = 1; n <= next.length; n++) {
+          roleEl.textContent = next.slice(0, n);
+          await sleep(55);
+        }
+      }
+    };
+    type();
+  }
 
-  tl.from("#hero-text a", {
-    scale: 0,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 0.5,
-    ease: "elastic.out(1, 0.5)"
-  }, "-=0.8");
-});
+  // Contadores animados
+  document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+    const target = parseFloat(el.dataset.count || "0");
+    const decimals = parseInt(el.dataset.decimals || "0");
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    if (reduce || target === 0) return;
+    const obj = { v: 0 };
+    gsap.to(obj, {
+      v: target,
+      duration: 1.6,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 95%", once: true },
+      onUpdate: () => {
+        el.textContent = `${prefix}${obj.v.toFixed(decimals)}${suffix}`;
+      },
+    });
+  });
 
+  initReveal();
 </script>
