@@ -51,8 +51,7 @@ const { currentLang, languages } = Astro.props;
   const html = document.documentElement;
   const icon = document.getElementById("theme-icon");
 
-  if (localStorage.theme === "dark") {
-    html.classList.add("dark");
+  if (html.classList.contains("dark")) {
     icon.textContent = "🌙";
   }
 

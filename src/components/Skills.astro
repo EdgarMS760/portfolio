@@ -1,0 +1,50 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+const { t } = Astro.props;
+const s = t.skills;
+const colors = ["#3B82F6", "#0EA5E9", "#8B5CF6", "#F59E0B"];
+---
+
+<section id="skills" class="scroll-mt-24 py-24 px-6 lg:px-20 max-w-screen-xl mx-auto">
+  <SectionHeader eyebrow={s.eyebrow} title={s.title} />
+
+  <div class="grid sm:grid-cols-2 gap-6" data-reveal-stagger>
+    {
+      s.groups.map((g, i) => (
+        <div
+          class="skill-card rounded-3xl p-6 lg:p-8 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-xl transition duration-300"
+          style={`--accent: ${colors[i % colors.length]};`}
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl skill-icon">{g.icon}</span>
+            <h3 class="text-xl font-bold">{g.name}</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {g.items.map((item) => (
+              <span class="skill-chip px-3 py-1.5 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 transition duration-200 cursor-default">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .skill-icon {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  .skill-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px -8px var(--accent);
+  }
+</style>
+
+<script>
+  import { initReveal } from "../scripts/reveal";
+  initReveal();
+</script>

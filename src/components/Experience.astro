@@ -1,0 +1,82 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+const { t } = Astro.props;
+const e = t.experience;
+---
+
+<section id="experience" class="scroll-mt-24 py-24 px-6 lg:px-20 max-w-screen-xl mx-auto">
+  <SectionHeader eyebrow={e.eyebrow} title={e.title} />
+
+  <div class="grid lg:grid-cols-5 gap-12">
+    <!-- Timeline -->
+    <ol id="timeline" class="relative lg:col-span-3 pl-8">
+      <span class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-gray-200 dark:bg-gray-700"></span>
+      <span
+        id="timeline-progress"
+        class="absolute left-[7px] top-2 bottom-2 w-0.5 origin-top bg-gradient-to-b from-blue-600 to-violet-600"
+      ></span>
+      {
+        e.items.map((item, i) => (
+          <li class="timeline-item relative pb-10 last:pb-0">
+            <span
+              class={`absolute -left-8 top-1.5 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900 ${
+                i === 0 ? "bg-emerald-500 ring-4 ring-emerald-500/20" : "bg-blue-600"
+              }`}
+            />
+            <p class="text-sm font-semibold text-blue-600 dark:text-blue-400">{item.period}</p>
+            <h3 class="text-xl font-bold mt-1">{item.role}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.org}</p>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <!-- Certificaciones -->
+    <div class="lg:col-span-2">
+      <h3 class="text-xl font-bold mb-5" data-reveal>{e.credentialsTitle}</h3>
+      <div class="space-y-3" data-reveal-stagger>
+        {
+          e.credentials.map((c) => (
+            <div class="flex items-start gap-4 rounded-2xl p-4 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 hover:border-blue-500 hover:translate-x-1 transition">
+              <span class="mt-0.5 text-xl">🏅</span>
+              <div>
+                <p class="font-semibold leading-snug">{c.title}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  {c.org} · {c.date}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { initReveal, prefersReducedMotion } from "../scripts/reveal";
+
+  if (!prefersReducedMotion()) {
+    gsap.fromTo(
+      "#timeline-progress",
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: { trigger: "#timeline", start: "top 70%", end: "bottom 60%", scrub: true },
+      },
+    );
+    gsap.utils.toArray<HTMLElement>(".timeline-item").forEach((item) => {
+      gsap.fromTo(item, { opacity: 0, x: 30 }, {
+        opacity: 1,
+        x: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: item, start: "top 85%", once: true },
+      });
+    });
+  }
+  initReveal();
+</script>

@@ -1,0 +1,216 @@
+---
+import "../../../styles/global.css";
+import { Image } from "astro:assets";
+import es from "../../../i18n/es";
+import en from "../../../i18n/en";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchFlow from "../../../components/ArchFlow.astro";
+import GitHub from "../../../assets/iconos/GitHub.svg";
+import multiAgentArchitecture from "../../../assets/ai/multi-agent-architecture.png";
+import type { Language } from "../../../types/language.type";
+
+export function getStaticPaths() {
+  return (["es", "en"] as const).flatMap((lang) =>
+    es.ai.items.map((item) => ({ params: { lang, slug: item.slug } })),
+  );
+}
+
+const images: Record<string, ImageMetadata> = { multiAgentArchitecture };
+
+const lang = Astro.params.lang as Language;
+const t = { es, en }[lang];
+const c = t.common;
+const items = t.ai.items;
+const index = items.findIndex((p) => p.slug === Astro.params.slug);
+const p = items[index];
+if (!p) throw new Error(`Proyecto de IA no encontrado: ${Astro.params.slug}`);
+const next = items[(index + 1) % items.length];
+const image = p.image ? images[p.image] : null;
+---
+
+<BaseLayout lang={lang} t={t} title={`${p.title} · Edgar Martínez`} description={p.summary}>
+  <a
+    href={`/${lang}#ai`}
+    class="fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md font-semibold rounded-full border border-gray-200 dark:border-gray-700 shadow-lg hover:-translate-x-0.5 transition"
+  >
+    ← {c.back}
+  </a>
+
+  <article style={`--accent: ${p.color};`}>
+    <!-- Encabezado -->
+    <header class="relative overflow-hidden">
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style={`background: radial-gradient(ellipse at top, ${p.color}40, transparent 65%);`}
+      >
+      </div>
+      <div class="relative max-w-screen-lg mx-auto px-6 pt-28 pb-14 text-center">
+        <p class="detail-in text-sm font-semibold uppercase tracking-widest mb-4" style={`color: ${p.color}`}>
+          {p.subtitle}
+        </p>
+        <h1 class="detail-in text-4xl lg:text-6xl font-extrabold leading-tight mb-6">{p.title}</h1>
+        <p class="detail-in text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+          {p.summary}
+        </p>
+        <div class="detail-in grid grid-cols-3 gap-3 max-w-2xl mx-auto mb-8">
+          {
+            p.metrics.map((m) => (
+              <div class="rounded-2xl p-4 bg-white/80 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 shadow-sm">
+                <p class="text-xl lg:text-2xl font-extrabold" style={`color: ${p.color}`}>
+                  {m.value}
+                </p>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{m.label}</p>
+              </div>
+            ))
+          }
+        </div>
+        <div class="detail-in flex flex-wrap justify-center items-center gap-3">
+          <a
+            href={p.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold hover:-translate-y-0.5 transition"
+            style={`background: ${p.color}; box-shadow: 0 10px 25px -8px ${p.color};`}
+          >
+            <img src={GitHub.src} alt="" class="w-5 h-5 invert" />
+            {c.code}
+          </a>
+        </div>
+        {p.note && <p class="detail-in mt-6 text-sm text-gray-500 dark:text-gray-400">{p.note}</p>}
+      </div>
+    </header>
+
+    <div class="max-w-screen-lg mx-auto px-6 pb-24 space-y-20">
+      <!-- Contexto -->
+      <section data-reveal>
+        <h2 class="text-2xl lg:text-3xl font-bold mb-4">{c.context}</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{p.context}</p>
+      </section>
+
+      <!-- Arquitectura -->
+      <section>
+        <h2 class="text-2xl lg:text-3xl font-bold mb-6" data-reveal>{c.architecture}</h2>
+        <ArchFlow layers={p.flow} color={p.color} hint={c.flowHint} size="lg" />
+        {
+          image && (
+            <Image
+              src={image}
+              alt={`${c.architecture}: ${p.title}`}
+              class="mt-8 w-full rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800"
+              data-reveal
+            />
+          )
+        }
+      </section>
+
+      <!-- Decisiones -->
+      <section>
+        <h2 class="text-2xl lg:text-3xl font-bold mb-6" data-reveal>{c.decisions}</h2>
+        <div class="grid md:grid-cols-2 gap-5" data-reveal-stagger>
+          {
+            p.decisions.map((d, i) => (
+              <div class="decision rounded-2xl p-6 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 hover:-translate-y-1 hover:shadow-xl transition duration-300">
+                <span
+                  class="inline-flex w-9 h-9 items-center justify-center rounded-lg font-bold text-white mb-4"
+                  style={`background: ${p.color}`}
+                >
+                  {i + 1}
+                </span>
+                <h3 class="text-lg font-bold mb-2">{d.title}</h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{d.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Bug -->
+      {
+        p.challenge && (
+          <section data-reveal>
+            <div
+              class="rounded-3xl p-8 lg:p-10 border-l-4 bg-gray-950 text-white shadow-2xl"
+              style={`border-color: ${p.color};`}
+            >
+              <p class="text-sm font-semibold uppercase tracking-widest mb-3" style={`color: ${p.color}`}>
+                🐛 {c.challenge}
+              </p>
+              <h2 class="text-2xl lg:text-3xl font-bold mb-4">{p.challenge.title}</h2>
+              <p class="text-lg text-white/80 leading-relaxed">{p.challenge.text}</p>
+            </div>
+          </section>
+        )
+      }
+
+      <!-- Resultados -->
+      <section>
+        <h2 class="text-2xl lg:text-3xl font-bold mb-6" data-reveal>{c.results}</h2>
+        <ul class="space-y-3" data-reveal-stagger>
+          {
+            p.results.map((r) => (
+              <li class="flex gap-3 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                <span class="font-bold" style={`color: ${p.color}`}>✓</span>
+                {r}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      {
+        p.production && (
+          <section data-reveal>
+            <h2 class="text-2xl lg:text-3xl font-bold mb-4">{c.production}</h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{p.production}</p>
+          </section>
+        )
+      }
+
+      <!-- Stack -->
+      <section>
+        <h2 class="text-2xl lg:text-3xl font-bold mb-6" data-reveal>{c.stack}</h2>
+        <div class="flex flex-wrap gap-2" data-reveal-stagger>
+          {
+            p.stack.map((s) => (
+              <span class="stack-chip px-3 py-1.5 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 transition">
+                {s}
+              </span>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Siguiente -->
+      <a
+        href={`/${lang}/ai/${next.slug}`}
+        class="group block rounded-3xl p-8 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition"
+        style={`background: linear-gradient(to right, ${next.color}30, transparent 70%);`}
+        data-reveal
+      >
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{c.next} →</p>
+        <p class="text-2xl font-bold group-hover:translate-x-2 transition-transform">{next.title}</p>
+        <p class="text-gray-600 dark:text-gray-300">{next.subtitle}</p>
+      </a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .stack-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .decision:hover {
+    border-color: var(--accent);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { initReveal, prefersReducedMotion } from "../../../scripts/reveal";
+  if (!prefersReducedMotion()) {
+    gsap.from(".detail-in", { opacity: 0, y: 30, stagger: 0.1, duration: 0.8, ease: "power3.out" });
+  }
+  initReveal();
+</script>

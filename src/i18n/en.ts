@@ -1,13 +1,11 @@
+import sections from "./sections.en";
+
 export default {
+  ...sections,
   cv: "https://docs.google.com/document/d/1cSkNfA-QrPJeIVfVIHlNcBbVW-0JO0X9/edit?usp=sharing&ouid=100567083380720697625&rtpof=true&sd=true",
   languageOptions: {
-    es: "Spanish",
+    es: "Español",
     en: "English"
-  },
-  home: {
-    title: 'Welcome! I\'m Edgar Martinez',
-    description: 'Full-stack developer, I love creating modern applications and testing new tools.',
-
   },
   projects: {
     title: 'Projects',
@@ -15,8 +13,8 @@ export default {
       {
         title: 'Studify',
         slug: 'Studify',
-        shortDescription: 'Educational web app with group management, tasks, reporting, and AI assistant.',
-        developWith: 'React, Node.js, Express, MongoDB, Firebase, OpenAI api.',
+        shortDescription: 'Full-stack education platform: groups, assignments, reports, real-time updates with Firebase and an AI tutor that guides instead of giving answers.',
+        developWith: 'React, Node.js, Express, MongoDB, Firebase, OpenAI API.',
         description: `Studify is an educational platform designed for elementary and middle school students. It's a friendly alternative to tools like Microsoft Teams, focused on enhancing interaction between teachers and younger students. It allows teachers to create groups, manage tasks, evaluations, and attendance, with Google authentication and real-time functionality powered by Firebase. <br>The front-end is built with React, Tailwind, and Material UI, while the back-end uses Node.js, Express, and MongoDB, ensuring a modern and scalable architecture.`,
         color: '#EE3200',
         github: 'https://github.com/EdgarMS760/studify_front',
@@ -85,7 +83,7 @@ export default {
        {
         title: 'UniTrip',
         slug: 'UniTrip',
-        shortDescription: 'Mobile app to share travel experiences.',
+        shortDescription: 'Native mobile app to share trips and rides, with its own REST API, chat and drafts.',
         developWith: 'Kotlin, Android Studio, Node.js, MySQL.',
         description:
           'UniTrip is a mobile application for travelers who want to share and discover travel experiences — or simply find a ride. It allows users to create posts, save drafts, edit content, search for posts by user, title, or description, and chat with others to coordinate plans. The app includes an authentication system with registration and login. It was developed in Kotlin using Android Studio, with a Node.js backend and MySQL as the database.',
@@ -112,35 +110,10 @@ export default {
         color: '#6750A5'
       },
       {
-        title: 'Tim Hortons',
-        slug: 'TimHortons',
-        shortDescription: 'Redesign of the Tim Hortons Mexico website.',
-        developWith: 'React, Flask, Python.',
-        description:
-          'Following UX/UI principles and patterns, a redesign of the Tim Hortons Mexico website was carried out to improve the user experience. The redesign was implemented using React for the frontend, ensuring a dynamic and responsive interface, and Python with the Flask framework for the backend, handling basic operations such as authentication and email services. The result is a more intuitive and visually appealing platform that enhances navigation and user interaction with Tim Hortons Mexico’s products and services.',
-        github: 'https://github.com/EdgarMS760/interfaces',
-        web: '',
-        features: [
-          {
-            title: 'Login & Register',
-            description: 'A simple, visually appealing, and user-centric login experience.',
-          },
-          {
-            title: 'Revamped homepage',
-            description: 'Improved visual layout, typographic hierarchy, and clear calls-to-action for better navigation.',
-          },
-          {
-            title: 'Checkout process',
-            description: 'Fast, accessible, and straightforward.',
-          },
-        ],
-        color: '#C8272D'
-      },
-      {
-        title: 'instacat',
+        title: 'Instacat',
         slug: 'Instacat',
-        developWith: 'Java, MySQL(procedures, functions, triggers and views), Tailwind CSS.',
-        shortDescription: ' blog-like web platform.',
+        developWith: 'Java, MySQL (procedures, functions, triggers and views), Tailwind CSS.',
+        shortDescription: 'Blog-style web platform with the data logic in MySQL: stored procedures, functions, triggers and views.',
         description: 'InstaCat is a blog-like web platform that allows you to make posts, edit them and follow other users to view their profiles. To build the site, Tailwind CSS was used for the frontend, Java for the programming logic and MySQL for the database. With InstaCat, you can enjoy an engaging experience while sharing your posts and connecting with other users.',
         github: '',
         web: '',
@@ -191,71 +164,7 @@ export default {
         ],
 
         color: '#A1C5E4'
-      },
-      
-      {
-        title: 'Faith Finder',
-        slug: 'FaithFinder',
-        shortDescription: 'Bible verse search platform.',
-        developWith: '.NET, SQL Server(procedures, functions,triggers and views), C#.',
-        description:
-          'Faith Finder is a desktop application that lets users search Bible verses by typing keywords. It features login and registration, advanced filters (language, version, testament, book), search history, favorites, and PDF chapter download. It also includes an admin panel to unlock blocked accounts. Built with .NET and SQL Server using stored procedures, triggers, and views.',
-        github: 'https://github.com/EdgarMS760/MAD',
-        web: '',
-        features: [
-          {
-            title: 'Smart search',
-            description: 'Quickly find Bible verses just by typing a keyword.',
-          },
-          {
-            title: 'Advanced filters',
-            description: 'Filter results by language, version, testament, book, chapter, or verse for precise queries.',
-          },
-          {
-            title: 'Favorites & PDF export',
-            description: 'Save key verses and download full chapters as PDF.',
-          },
-          {
-            title: 'User management',
-            description: 'Admin panel to unlock accounts blocked due to password errors.',
-          }
-        ],
-        color: '#F6DFB4'
       }
-
     ]
   }
 };
-
-//  {
-//   title: 'ULearrning',
-//   slug: 'ULearrning',
-//   shortDescription: 'E-learning platform for instructors and students',
-//   description:
-//     'ULearrning es una plataforma educativa que permite a estudiantes e instructores interactuar con cursos en línea. Incluye funcionalidades de autenticación con bloqueo de cuentas tras múltiples intentos fallidos, gestión de cursos, reportes avanzados, perfiles editables, búsqueda de cursos con filtros y generación de certificados. También cuenta con un panel administrativo para moderar usuarios y categorías.',
-//   github: '',
-//   web: 'http://ulearrning.test/iniciar_sesion',
-//   features: [
-//     {
-//       title: 'Inicio de sesión y registro seguro',
-//       description: 'Autenticación con bloqueo tras 3 intentos fallidos y validación de contraseña con requisitos específicos.',
-//     },
-//     {
-//       title: 'Panel de instructor',
-//       description: 'Estadísticas generales, generación de reportes y administración de cursos activos/inactivos.',
-//     },
-//     {
-//       title: 'Panel de estudiante',
-//       description: 'Búsqueda avanzada de cursos, carrito de compras, historial, comentarios y generación de certificados.',
-//     },
-//     {
-//       title: 'Gestión de perfiles',
-//       description: 'Edición de datos personales, visualización de cursos y filtrado por parámetros avanzados.',
-//     },
-//     {
-//       title: 'Panel de administración',
-//       description: 'Gestión de categorías, activación/inactivación de usuarios y moderación de comentarios.',
-//     }
-//   ],
-//   color: '#9A6BB5' // Puedes cambiar este color según el diseño de tu UI
-// }

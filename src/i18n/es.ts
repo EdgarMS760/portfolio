@@ -1,13 +1,11 @@
+import sections from "./sections.es";
+
 export default {
+  ...sections,
   cv: "https://docs.google.com/document/d/1Owb9t1Hjiy7c1fdHGF5wEVEPNWx2AC6M/edit?usp=sharing&ouid=100567083380720697625&rtpof=true&sd=true",
   languageOptions: {
     es: "Español",
-    en: "Inglés"
-  },
-  home: {
-    title: '¡Bienvenido! Soy Edgar Martínez',
-    description: 'Desarrollador full-stack, me encanta crear aplicaciones modernas y probar nuevas herramientas.',
-
+    en: "English"
   },
   projects: {
     title: 'Proyectos',
@@ -15,8 +13,8 @@ export default {
       {
         title: 'Studify',
         slug: 'Studify',
-        shortDescription: 'Aplicación web educativa con gestión de grupos, tareas, reporteria y asistente IA.',
-        developWith: 'React, Node.js, Express, MongoDB, Firebase, OpenAI api.',
+        shortDescription: 'Plataforma educativa full-stack: grupos, tareas, reportes, tiempo real con Firebase y un tutor con IA que guía sin dar la respuesta.',
+        developWith: 'React, Node.js, Express, MongoDB, Firebase, OpenAI API.',
         description: `Studify es una plataforma educativa pensada para estudiantes de educación básica. Es una alternativa amigable a herramientas como Microsoft Teams, enfocada en la interacción entre profesores y alumnos más jóvenes. Permite crear grupos, gestionar tareas, evaluaciones y asistencias, con autenticación mediante Google y funcionalidades en tiempo real gracias a Firebase. Además, integra un chatbot con IA (GPT-3.5 Turbo) que guía a los niños a resolver sus dudas sin dar respuestas directas, fomentando el pensamiento crítico. <br>El front-end está hecho con React, Tailwind y Material UI, mientras que el back-end utiliza Node.js, Express y MongoDB, asegurando una arquitectura moderna y escalable.`,
         color: '#EE3200',
         github: 'https://github.com/EdgarMS760/studify_front',
@@ -86,7 +84,7 @@ export default {
       {
         title: 'UniTrip',
         slug: 'UniTrip',
-        shortDescription: 'aplicacion móvil para compartir viajes.',
+        shortDescription: 'App móvil nativa para compartir viajes y aventones, con su propia API REST, chat y borradores.',
         developWith: 'Kotlin, Android Studio, Node.js, MySQL.',
         description:
           'UniTrip es una aplicación móvil para viajeros que desean compartir y descubrir experiencias de viaje o simplemente un aventón. Permite crear publicaciones, guardar borradores, editar contenido, buscar posts por usuario, titulo o descripcion, y chatear con otros usuarios para ponerse de acuerdo. La app incluye un sistema de autenticación con registro y login. Fue desarrollada con kotlin, utilizando android studio y para el back-end se utilizo node.js con mysql como base de datos.',
@@ -113,35 +111,10 @@ export default {
         color: '#6750A5'
       },
       {
-        title: 'Tim Hortons',
-        slug: 'TimHortons',
-        shortDescription: 'Rediseño de la página de Tim Hortons México.',
-        developWith: 'React, Flask, Python.',
-        description:
-          'Siguiendo principios y patrones UX/UI, se realizó un rediseño del sitio web de Tim Hortons México para mejorar la experiencia de usuario. Este rediseño se realizó utilizando React para el frontend, asegurando una interfaz dinámica y responsiva, y Python con el framework Flask para el backend para operaciones sencillas como autenticación y envío de correos electrónicos. El resultado es una plataforma más intuitiva y atractiva que facilita la navegación y mejora la interacción del usuario con los servicios y productos de Tim Hortons México.',
-        github: 'https://github.com/EdgarMS760/interfaces',
-        web: '',
-        features: [
-          {
-            title: 'Inicio de sesión & Registro',
-            description: 'Una experiencia de inicio de sesión sencilla, visualmente atractiva y centrada en el usuario.',
-          },
-          {
-            title: 'Página de inicio renovada',
-            description: 'Se mejoró la disposición visual, jerarquía tipográfica y llamadas a la acción para una navegación más clara.',
-          },
-          {
-            title: 'Proceso de pago',
-            description: 'Rápido, accesible y sin rodeos',
-          },
-        ],
-        color: '#C8272D'
-      },
-      {
-        title: 'instacat',
+        title: 'Instacat',
         slug: 'Instacat',
-        shortDescription: 'plataforma web tipo blog',
-        developWith: 'Java, MySQL(procedures, functions, triggers y views), Tailwind CSS.',
+        shortDescription: 'Plataforma web tipo blog con la lógica de datos en MySQL: procedimientos, funciones, triggers y vistas.',
+        developWith: 'Java, MySQL (procedures, functions, triggers y views), Tailwind CSS.',
         description: 'InstaCat es una plataforma web tipo blog que te permite realizar publicaciones, editarlas y seguir a otros usuarios para ver sus perfiles. Para construir el sitio, se utilizó Tailwind CSS para el frontend, Java para la lógica de programación y MySQL para la base de datos.',
         github: 'https://github.com/EdgarMS760/MAD',
         web: '',
@@ -189,70 +162,7 @@ export default {
         `
         }],
         color: '#A1C5E4'
-      },
-
-      {
-        title: 'Faith Finder',
-        slug: 'FaithFinder',
-        shortDescription: 'Plataforma de búsqueda de versículos bíblicos.',
-        developWith: '.NET, SQL Server(procedures, functions,triggers y views), C#.',
-        description: 'Faith Finder es una aplicación de escritorio que permite buscar versículos de la Biblia mediante palabras clave. Ofrece un sistema de login y registro, filtros avanzados (idioma, versión, testamento, libro), historial de búsqueda, favoritos y descarga de capítulos en PDF. También cuenta con un panel administrativo para desbloquear cuentas bloqueadas. Fue desarrollada con .NET y SQL Server, utilizando procedimientos almacenados, triggers y vistas.',
-
-        github: '',
-        web: '',
-        features: [
-          {
-            title: 'Login y favoritos',
-            description: 'Ingreso seguro, favoritos personales e historial de búsqueda.',
-          },
-          {
-            title: 'Filtros avanzados y busqueda',
-            description: 'Busca cualquier palabra o filtra resultados por idioma, versión, testamento, libro, capítulo o versículo para una búsqueda precisa.',
-          },
-          {
-            title: 'Gestión de usuarios',
-            description: 'Panel administrativo para desbloquear cuentas bloqueadas por errores de contraseña.',
-          },
-          {
-            title: 'Favoritos y PDF',
-            description: 'Guarda versículos importantes y descarga capítulos completos en formato PDF.',
-          }
-        ],
-        color: '#F6DFB4'
       }
     ]
   }
 };
-
-// {
-//   title: 'ULearrning',
-//   slug: 'ULearrning',
-//   shortDescription: 'E-learning platform for instructors and students',
-//   description:
-//     'ULearrning es una plataforma educativa que permite a estudiantes e instructores interactuar con cursos en línea. Incluye funcionalidades de autenticación con bloqueo de cuentas tras múltiples intentos fallidos, gestión de cursos, reportes avanzados, perfiles editables, búsqueda de cursos con filtros y generación de certificados. También cuenta con un panel administrativo para moderar usuarios y categorías.',
-//   github: '',
-//   web: 'http://ulearrning.test/iniciar_sesion',
-//   features: [
-//     {
-//       title: 'Inicio de sesión y registro seguro',
-//       description: 'Autenticación con bloqueo tras 3 intentos fallidos y validación de contraseña con requisitos específicos.',
-//     },
-//     {
-//       title: 'Panel de instructor',
-//       description: 'Estadísticas generales, generación de reportes y administración de cursos activos/inactivos.',
-//     },
-//     {
-//       title: 'Panel de estudiante',
-//       description: 'Búsqueda avanzada de cursos, carrito de compras, historial, comentarios y generación de certificados.',
-//     },
-//     {
-//       title: 'Gestión de perfiles',
-//       description: 'Edición de datos personales, visualización de cursos y filtrado por parámetros avanzados.',
-//     },
-//     {
-//       title: 'Panel de administración',
-//       description: 'Gestión de categorías, activación/inactivación de usuarios y moderación de comentarios.',
-//     }
-//   ],
-//   color: '#9A6BB5' // Puedes cambiar este color según el diseño de tu UI
-// }
